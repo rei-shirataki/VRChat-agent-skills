@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Invites
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Invites
@@ -16,12 +16,12 @@ last_verified: 2026-05-21
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | POST | `/invite/{userId}` | inviteUser | ユーザーをインスタンスに招待 |
-| POST | `/invite/photo/{userId}` | inviteUserWithPhoto | 写真付きでユーザーを招待 |
+| POST | `/invite/{userId}/photo` | inviteUserWithPhoto | 写真付きでユーザーを招待 |
 | POST | `/invite/myself/to/{worldId}:{instanceId}` | inviteMyselfTo | 自分自身をインスタンスに招待 |
 | POST | `/requestInvite/{userId}` | requestInvite | ユーザーに招待を要求 |
-| POST | `/requestInvite/photo/{userId}` | requestInviteWithPhoto | 写真付きで招待を要求 |
+| POST | `/requestInvite/{userId}/photo` | requestInviteWithPhoto | 写真付きで招待を要求 |
 | POST | `/invite/{notificationId}/response` | respondInvite | 招待に返答 |
-| POST | `/invite/photo/{notificationId}/response` | respondInviteWithPhoto | 写真付きで招待に返答 |
+| POST | `/invite/{notificationId}/response/photo` | respondInviteWithPhoto | 写真付きで招待に返答 |
 | GET | `/message/{userId}/{messageType}` | getInviteMessages | 招待メッセージ一覧 |
 | GET | `/message/{userId}/{messageType}/{slot}` | getInviteMessage | 特定スロットの招待メッセージ |
 | PUT | `/message/{userId}/{messageType}/{slot}` | updateInviteMessage | 招待メッセージを更新 |

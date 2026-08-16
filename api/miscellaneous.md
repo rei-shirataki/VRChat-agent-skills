@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Miscellaneous
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Miscellaneous
@@ -18,10 +18,10 @@ last_verified: 2026-05-21
 | メソッド | パス | operationId | 認証 | 説明 |
 |---|---|---|---|---|
 | GET | `/config` | getConfig | 不要 | APIの設定情報を取得 |
-| GET | `/health` | getHealth | 不要 | APIの稼働状態を確認 |
+| GET | `/health` | getHealth | 不要 | APIの稼働状態を確認（**非推奨、常に401を返す**） |
 | GET | `/time` | getSystemTime | 不要 | サーバーの現在時刻を取得 |
 | GET | `/visits` | getCurrentOnlineUsers | 不要 | 現在のオンラインユーザー数を取得 |
-| GET | `/infoPush` | getInfoPush | 不要 | インフォメーション通知を取得 |
+| GET | `/infoPush` | getInfoPush | 必須 | インフォメーション通知を取得 |
 | GET | `/auth/permissions` | getAssignedPermissions | 必須 | 自分に付与されているパーミッション一覧 |
 | GET | `/css/app.css` | getCSS | 不要 | フロントエンドのCSSを取得（302リダイレクト） |
 | GET | `/js/app.js` | getJavaScript | 不要 | フロントエンドのJSを取得（302リダイレクト） |
@@ -35,11 +35,13 @@ APIの動作設定（利用規約バージョン・機能フラグ・制限値�
 
 ### `GET /health`
 
+> **非推奨（`deprecated: true`）**: VRChatが理由不明のままこのエンドポイントを制限しており、現在は常に401 Unauthorizedを返します。ヘルスチェック用途には使用できません。
+
 ```json
 { "ok": true, "serverName": "...", "buildVersionTag": "..." }
 ```
 
-APIが正常稼働しているかを確認します。
+（本来はAPIの稼働状態・サーバー名・ビルドバージョンタグを返す想定でしたが、現状は機能していません）
 
 ### `GET /time`
 
@@ -57,3 +59,5 @@ VRC+ 等のサブスクリプションによって付与されているパーミ
 
 - `/css/app.css` と `/js/app.js` は Cloudfront への 302 リダイレクトを返します。HTTPライブラリがリダイレクト追従に対応している必要があります
 - `/permissions`（管理者向け）と `/auth/permissions`（一般ユーザー向け）は別のエンドポイントです
+- `GET /health` は非推奨で、現在は常に401を返します。稼働確認には別の手段（例: `/config` や `/time` への疎通確認）を検討してください
+- `/infoPush` は `authCookie` による認証が必須です

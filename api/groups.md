@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Groups
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Groups
@@ -35,7 +35,7 @@ last_verified: 2026-05-21
 | GET | `/groups/{groupId}/members/{userId}` | getGroupMember | 特定メンバーの情報 |
 | PUT | `/groups/{groupId}/members/{userId}` | updateGroupMember | メンバー情報を更新 |
 | DELETE | `/groups/{groupId}/members/{userId}` | kickGroupMember | メンバーをキック |
-| POST | `/groups/{groupId}/members/{userId}/roles/{groupRoleId}` | addGroupMemberRole | メンバーにロールを付与 |
+| PUT | `/groups/{groupId}/members/{userId}/roles/{groupRoleId}` | addGroupMemberRole | メンバーにロールを付与 |
 | DELETE | `/groups/{groupId}/members/{userId}/roles/{groupRoleId}` | removeGroupMemberRole | メンバーからロールを削除 |
 
 ### 参加・招待・申請
@@ -47,7 +47,7 @@ last_verified: 2026-05-21
 | GET | `/groups/{groupId}/invites` | getGroupInvites | 招待済み一覧 |
 | POST | `/groups/{groupId}/invites` | createGroupInvite | ユーザーを招待 |
 | DELETE | `/groups/{groupId}/invites/{userId}` | deleteGroupInvite | 招待を取り消し |
-| PUT | `/groups/{groupId}/invites/{notificationId}/decline` | declineGroupInvite | 招待を辞退 |
+| PUT | `/groups/{groupId}/invites` | declineGroupInvite | 招待を辞退 |
 | GET | `/groups/{groupId}/requests` | getGroupRequests | 参加申請一覧 |
 | DELETE | `/groups/{groupId}/requests` | cancelGroupRequest | 参加申請をキャンセル |
 | PUT | `/groups/{groupId}/requests/{userId}` | respondGroupJoinRequest | 参加申請を承認/拒否 |
@@ -80,8 +80,8 @@ last_verified: 2026-05-21
 | DELETE | `/groups/{groupId}/announcement` | deleteGroupAnnouncement | アナウンスを削除 |
 | GET | `/groups/{groupId}/posts` | getGroupPosts | 投稿一覧 |
 | POST | `/groups/{groupId}/posts` | addGroupPost | 投稿を作成 |
-| PUT | `/groups/{groupId}/posts/{postId}` | updateGroupPost | 投稿を編集 |
-| DELETE | `/groups/{groupId}/posts/{postId}` | deleteGroupPost | 投稿を削除 |
+| PUT | `/groups/{groupId}/posts/{notificationId}` | updateGroupPost | 投稿を編集 |
+| DELETE | `/groups/{groupId}/posts/{notificationId}` | deleteGroupPost | 投稿を削除 |
 
 ### ギャラリー
 
@@ -90,7 +90,7 @@ last_verified: 2026-05-21
 | POST | `/groups/{groupId}/galleries` | createGroupGallery | ギャラリーを作成 |
 | PUT | `/groups/{groupId}/galleries/{groupGalleryId}` | updateGroupGallery | ギャラリーを更新 |
 | DELETE | `/groups/{groupId}/galleries/{groupGalleryId}` | deleteGroupGallery | ギャラリーを削除 |
-| GET | `/groups/{groupId}/galleries/{groupGalleryId}/images` | getGroupGalleryImages | ギャラリー画像一覧 |
+| GET | `/groups/{groupId}/galleries/{groupGalleryId}` | getGroupGalleryImages | ギャラリー画像一覧 |
 | POST | `/groups/{groupId}/galleries/{groupGalleryId}/images` | addGroupGalleryImage | 画像を追加 |
 | DELETE | `/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}` | deleteGroupGalleryImage | 画像を削除 |
 
@@ -102,7 +102,7 @@ last_verified: 2026-05-21
 | GET | `/groups/{groupId}/auditLogs` | getGroupAuditLogs | 監査ログ一覧 |
 | GET | `/groups/{groupId}/auditLogTypes` | getGroupAuditLogEntryTypes | 監査ログ種別一覧 |
 | PUT | `/groups/{groupId}/representation` | updateGroupRepresentation | 代表グループを変更 |
-| GET | `/groups/{groupId}/transferability` | getGroupTransferability | 譲渡可能かを確認 |
+| GET | `/groups/{groupId}/transfer` | getGroupTransferability | 譲渡可能かを確認 |
 | POST | `/groups/{groupId}/transfer` | initiateOrAcceptGroupTransfer | グループ譲渡を開始/承認 |
 | DELETE | `/groups/{groupId}/transfer` | cancelGroupTransfer | グループ譲渡をキャンセル |
 

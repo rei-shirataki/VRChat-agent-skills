@@ -3,7 +3,7 @@ scope: osc
 title: OSC DIY
 source: https://docs.vrchat.com/docs/osc-diy
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # OSC DIY
@@ -34,7 +34,7 @@ OSCメッセージは**アドレス**と**値**で構成されます。
 ```
 
 - アドレスはスラッシュ区切りの階層構造（例: `/fridge/door/butter`）
-- 値の型: `int`、`float`、`bool` をサポート
+- 値の型: Avatar Parametersでは `int`、`float`、`bool` をサポート
 
 ## 通信モデル
 
@@ -56,7 +56,7 @@ OSCは**単方向通信**です。
 
 | 言語 | ライブラリ | 備考 |
 |---|---|---|
-| C# | [OscCore](https://github.com/stella3d/OscCore) | Unity 対応、all-in-one ブランチ推奨 |
+| C# | [OscCore（VRChat推奨ブランチ）](https://github.com/vrchat/osccore/tree/all-in-one) | Unity 対応。VRChat公式ドキュメントが直接リンクする all-in-one ブランチが最もパフォーマンス・メモリ効率に優れる |
 | Python | [python-osc](https://github.com/attwad/python-osc) | 軽量・シンプル |
 
 ## Unity での実装上の注意

@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Files
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Files
@@ -20,10 +20,14 @@ last_verified: 2026-05-21
 
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
+| GET | `/files` | getFiles | ファイル一覧を取得（`tag`、`n`、`offset` でフィルタ） |
 | POST | `/file` | createFile | Fileオブジェクトを作成 |
 | GET | `/file/{fileId}` | getFile | Fileオブジェクトの情報を取得 |
 | DELETE | `/file/{fileId}` | deleteFile | Fileオブジェクトを削除 |
-| POST | `/file/image` | uploadImage | 画像（アイコン・ギャラリー・スタンプ等）をアップロード |
+| POST | `/file/image` | uploadImage | 画像（アイコン・ギャラリー・スタンプ・絵文字等）をアップロード |
+| POST | `/gallery` | uploadGalleryImage | ギャラリー画像をアップロード |
+| POST | `/icon` | uploadIcon | アイコンをアップロード |
+| GET | `/adminassetbundles/{adminAssetBundleId}` | getAdminAssetBundle | AdminAssetBundleオブジェクトを取得 |
 
 ### ファイルバージョン管理
 
@@ -45,9 +49,9 @@ last_verified: 2026-05-21
 
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
-| GET | `/file/{fileId}/{versionId}/analysis` | getFileAnalysis | アバターのパフォーマンス解析 |
-| GET | `/file/{fileId}/{versionId}/analysis/security` | getFileAnalysisSecurity | セキュリティ解析 |
-| GET | `/file/{fileId}/{versionId}/analysis/standard` | getFileAnalysisStandard | 標準パフォーマンス解析 |
+| GET | `/analysis/{fileId}/{versionId}` | getFileAnalysis | アバターのパフォーマンス解析 |
+| GET | `/analysis/{fileId}/{versionId}/security` | getFileAnalysisSecurity | セキュリティ解析 |
+| GET | `/analysis/{fileId}/{versionId}/standard` | getFileAnalysisStandard | 標準パフォーマンス解析 |
 
 ### コンテンツ同意
 
@@ -91,6 +95,9 @@ last_verified: 2026-05-21
 
 ## 注意事項
 
-- `uploadImage` は PNG バイナリを multipart/form-data で送信します
-- アニメーション画像の場合は `frameCount`（フレーム数）と `animationFPS` が必要です
+- `uploadImage` は PNG バイナリを multipart/form-data で送信します（`file` と `tag` が必須）
+- アニメーション画像の場合は `frames`（フレーム数、2〜64）と `framesOverTime`（アニメーションFPS、1〜64）が必要です
 - ファイルバージョンは最新のものしか削除できません
+- `getFiles` の `userId` クエリパラメータは非推奨（`deprecated: true`）で、常に500パーミッションエラーになります
+- `startFileDataUpload` の `partNumber` クエリパラメータは非推奨です
+- `uploadGalleryImage`（`POST /gallery`）と `uploadIcon`（`POST /icon`）は `file` フィールドのみを受け付けます。`uploadImage`（`POST /file/image`）は `file` に加えて `tag` が必須で、アニメーション用の `frames`/`framesOverTime` 等も指定できます

@@ -3,7 +3,7 @@ scope: osc
 title: OSCQuery
 source: https://docs.vrchat.com/docs/oscquery
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # OSCQuery
@@ -23,8 +23,9 @@ VRChatは **2023.3.1** リリース以降、OSCQuery仕様を実装していま�
 
 | リソース | 説明 |
 |---|---|
-| OSCQuery仕様リポジトリ | OSCQueryプロトコルの詳細仕様 |
-| VRChat向けC#ライブラリ | OSCQuery統合のためのオープンソースライブラリ |
+| [OSCQuery仕様リポジトリ](https://github.com/Vidvox/OSCQueryProposal) | OSCQueryプロトコルの詳細仕様 |
+| [VRChat OSCQuery接続ガイド](https://github.com/vrchat-community/osc/wiki/OSCQuery) | VRChatとOSCQueryを連携させるための実装ガイド |
+| [VRChat向けC#ライブラリ (vrc-oscquery-lib)](https://github.com/vrchat-community/vrc-oscquery-lib) | OSCQuery統合のためのオープンソースライブラリ |
 
 詳細な技術仕様については [OSCQuery仕様リポジトリ](https://github.com/Vidvox/OSCQueryProposal) を参照してください。
 

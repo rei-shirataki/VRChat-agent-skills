@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Inventory
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Inventory
@@ -27,22 +27,22 @@ last_verified: 2026-05-21
 
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
-| GET | `/inventory/template/{templateId}` | getInventoryTemplate | インベントリテンプレートを取得 |
-| GET | `/inventory/{inventoryId}/item/{itemId}` | getOwnInventoryItem | 自分のインベントリアイテムを取得 |
-| PUT | `/inventory/{inventoryId}/item/{itemId}` | updateOwnInventoryItem | アイテムを更新 |
-| DELETE | `/inventory/{inventoryId}/item/{itemId}` | deleteOwnInventoryItem | アイテムを削除 |
-| POST | `/inventory/{inventoryId}/item/{itemId}/consume` | consumeOwnInventoryItem | アイテムを消費 |
-| POST | `/inventory/{inventoryId}/item/{itemId}/equip` | equipOwnInventoryItem | アイテムを装備 |
-| DELETE | `/inventory/{inventoryId}/slot/{slotId}` | unequipOwnInventorySlot | スロットのアイテムを装備解除 |
-| GET | `/users/{userId}/inventory/{inventoryId}/item/{itemId}` | getUserInventoryItem | 他ユーザーのアイテムを取得 |
+| GET | `/inventory/template/{inventoryTemplateId}` | getInventoryTemplate | インベントリテンプレートを取得 |
+| GET | `/inventory/{inventoryItemId}` | getOwnInventoryItem | 自分のインベントリアイテムを取得 |
+| PUT | `/inventory/{inventoryItemId}` | updateOwnInventoryItem | アイテムを更新 |
+| DELETE | `/inventory/{inventoryItemId}` | deleteOwnInventoryItem | アイテムを削除 |
+| PUT | `/inventory/{inventoryItemId}/consume` | consumeOwnInventoryItem | アイテムを消費 |
+| PUT | `/inventory/{inventoryItemId}/equip` | equipOwnInventoryItem | アイテムを装備 |
+| DELETE | `/inventory/{inventoryItemId}/equip` | unequipOwnInventorySlot | スロットのアイテムを装備解除（`inventoryItemId` にスロットIDを指定） |
+| GET | `/user/{userId}/inventory/{inventoryItemId}` | getUserInventoryItem | 他ユーザーのアイテムを取得 |
 
 ### 共有・スポーン
 
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | POST | `/inventory/cloning/direct` | shareInventoryItemDirect | 他ユーザーに直接共有 |
-| POST | `/inventory/cloning/pedestal` | shareInventoryItemPedestal | ペデスタル経由で共有 |
-| POST | `/inventory/spawn` | spawnInventoryItem | インスタンスにアイテムをスポーン |
+| GET | `/inventory/cloning/pedestal` | shareInventoryItemPedestal | ペデスタル経由で共有 |
+| GET | `/inventory/spawn` | spawnInventoryItem | インスタンスにアイテムをスポーン |
 
 ### リワード
 
@@ -53,4 +53,7 @@ last_verified: 2026-05-21
 ## 注意事項
 
 - インベントリはVRChatのコレクタブルアイテム（ドロップバンドル等）の管理機能です
-- 他ユーザーのアイテムは `getUserInventoryItem` でのみ参照可能（変更不可）
+- 他ユーザーのアイテムは `getUserInventoryItem` でのみ参照可能（変更不可）。パスは `/user/{userId}/...`（単数形）です
+- アイテムパスは `/inventory/{inventoryId}/item/{itemId}` ではなく、フラットな `/inventory/{inventoryItemId}` です
+- `equipOwnInventoryItem`（PUT）と `unequipOwnInventorySlot`（DELETE）は同じパス `/inventory/{inventoryItemId}/equip` に対する異なるHTTPメソッドです（DELETE時の `inventoryItemId` はスロットIDとして扱われます）
+- `shareInventoryItemPedestal` と `spawnInventoryItem` はGETメソッドです（POSTではありません）

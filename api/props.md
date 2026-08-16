@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Props
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Props
@@ -22,8 +22,8 @@ Propはインスタンス内にスポーン可能なインタラクタブルア�
 | GET | `/props/{propId}` | getProp | Prop情報を取得 |
 | PUT | `/props/{propId}` | updateProp | Propを更新 |
 | DELETE | `/props/{propId}` | deleteProp | Propを削除 |
-| GET | `/props/{propId}/publishStatus` | getPropPublishStatus | Propの公開状態を確認 |
-| POST | `/props/{propId}/publish` | publishProp | Propを公開 |
+| GET | `/props/{propId}/publish` | getPropPublishStatus | Propの公開状態を確認 |
+| PUT | `/props/{propId}/publish` | publishProp | Propを公開 |
 | DELETE | `/props/{propId}/publish` | unpublishProp | Propを非公開に |
 
 ## Prop オブジェクトの主要フィールド

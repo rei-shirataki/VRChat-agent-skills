@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Jams
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Jams
@@ -21,7 +21,7 @@ Jam はアバターやワールドの創作コンテストイベントです。
 | GET | `/jams/{jamId}` | getJam | 特定のJam情報を取得 |
 | GET | `/jams/{jamId}/submissions` | getJamSubmissions | Jamへの投稿一覧 |
 | POST | `/jams/{jamId}/submissions` | submitJamContent | Jamにコンテンツを投稿 |
-| DELETE | `/jams/{jamId}/submissions/{submissionId}` | deleteJamSubmission | 投稿を取り消し |
+| DELETE | `/jams/{jamId}/submissions/{jamSubmissionId}` | deleteJamSubmission | 投稿を取り消し |
 
 ## getJams クエリパラメータ
 

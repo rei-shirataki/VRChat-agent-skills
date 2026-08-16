@@ -3,7 +3,7 @@ scope: osc
 title: OSC Avatar Parameters
 source: https://docs.vrchat.com/docs/osc-avatar-parameters
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # OSC Avatar Parameters

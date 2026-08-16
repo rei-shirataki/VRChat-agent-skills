@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Favorites
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Favorites
@@ -22,7 +22,7 @@ last_verified: 2026-05-21
 | GET | `/favorite/groups` | getFavoriteGroups | お気に入りグループ一覧 |
 | GET | `/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}` | getFavoriteGroup | 特定のお気に入りグループ情報 |
 | PUT | `/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}` | updateFavoriteGroup | お気に入りグループを更新 |
-| PUT | `/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}/clear` | clearFavoriteGroup | お気に入りグループの中身を全消去 |
+| DELETE | `/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}` | clearFavoriteGroup | お気に入りグループの中身を全消去 |
 
 ## getFavorites クエリパラメータ
 

@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Avatars
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Avatars
@@ -22,24 +22,31 @@ last_verified: 2026-05-21
 | GET | `/avatars/{avatarId}` | getAvatar | IDでアバター情報取得 |
 | PUT | `/avatars/{avatarId}` | updateAvatar | アバター情報更新 |
 | DELETE | `/avatars/{avatarId}` | deleteAvatar | アバター削除 |
+| DELETE | `/avatars/{avatarId}/impostor` | deleteImpostor | 生成済みImpostorを削除 |
+| POST | `/avatars/{avatarId}/impostor/enqueue` | enqueueImpostor | Impostor生成をキューに追加 |
 | PUT | `/avatars/{avatarId}/select` | selectAvatar | アバターを装着 |
-| PUT | `/avatars/{avatarId}/selectFallback` | selectFallbackAvatar | フォールバックアバターとして設定 |
+| PUT | `/avatars/{avatarId}/selectFallback` | selectFallbackAvatar | **非推奨**。フォールバックアバターとして設定 |
 | GET | `/avatarStyles` | getAvatarStyles | アバタースタイル一覧 |
 | GET | `/avatars/impostor/queue/stats` | getImpostorQueueStats | Impostor生成キューの統計 |
+| GET | `/users/{userId}/avatar` | getOwnAvatar | 自分の現在のアバターを取得（他ユーザー指定はエラー） |
 
 ## searchAvatars クエリパラメータ
 
 | パラメータ | 型 | 説明 |
 |---|---|---|
 | `user` | string | `me` を指定すると自分のアバターのみ |
+| `userId` | string | 特定ユーザーのアバターを検索 |
 | `featured` | boolean | フィーチャードアバターのみ |
 | `sort` | string | 並び順 |
+| `order` | string | `ascending` / `descending` |
 | `n` | integer | 取得件数 |
 | `offset` | integer | ページングオフセット |
 | `tag` | string | タグでフィルター |
 | `notag` | string | 除外タグ |
 | `releaseStatus` | string | `public`, `private`, `hidden` |
 | `platform` | string | プラットフォームでフィルター |
+| `maxUnityVersion` | string | 最大Unityバージョン |
+| `minUnityVersion` | string | 最小Unityバージョン |
 
 ## 主要レスポンスフィールド（Avatar オブジェクト）
 
@@ -63,3 +70,4 @@ last_verified: 2026-05-21
 - `searchAvatars` は**自分のアバターまたはfeaturedアバターのみ**検索可能。他ユーザーのアバターは検索不可
 - `selectAvatar` でアバターを装着すると即座に反映される
 - アバター作成時にカスタムIDを指定することが可能だが、既存IDは使用不可
+- `selectFallbackAvatar` は非推奨。呼び出すには対象アバターがフォールバック用としてタグ付けされている必要がある

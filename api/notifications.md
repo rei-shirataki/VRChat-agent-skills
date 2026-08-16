@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Notifications
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Notifications
@@ -30,6 +30,7 @@ last_verified: 2026-05-21
 |---|---|---|---|
 | GET | `/notifications` | getNotificationV2s | NotificationV2一覧を取得 |
 | DELETE | `/notifications` | deleteAllNotificationV2s | 全NotificationV2を削除 |
+| GET | `/notifications/{notificationId}` | getNotificationV2 | **非推奨**。特定NotificationV2を取得（通常ユーザーは403） |
 | DELETE | `/notifications/{notificationId}` | deleteNotificationV2 | 特定NotificationV2を削除 |
 | POST | `/notifications/{notificationId}/reply` | replyNotificationV2 | NotificationV2に返信 |
 | POST | `/notifications/{notificationId}/respond` | respondNotificationV2 | NotificationV2に応答 |
@@ -89,4 +90,4 @@ PUT /auth/user/notifications/{frq_...}/hide
 ## 注意事項
 
 - フレンド申請の承認は Notifications API 経由。Friends API の `deleteFriendRequest` は**送信した**申請を取り消す用
-- `getNotificationV2`（`GET /notifications/{id}`）は通常ユーザーでは 403 が返る（管理者権限が必要）
+- `getNotificationV2`（`GET /notifications/{id}`）は非推奨かつ通常ユーザーでは 403 が返る（管理者権限が必要）

@@ -3,7 +3,7 @@ scope: websocket
 title: VRChat WebSocket — Pipeline
 source: https://vrchat.community/websocket/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat WebSocket — Pipeline
@@ -78,6 +78,15 @@ wss://pipeline.vrchat.cloud/?authToken={auth_cookie_value}
 |---|---|---|
 | `user-update` | `{ userId, user }` | 自分のプロフィール更新 |
 | `user-location` | `{ userId, location, worldId, instance }` | 自分のワールド移動 |
+| `user-badge-assigned` | `{ badge: Badge }` | バッジを取得した（VRC+登録等） |
+| `user-badge-unassigned` | `{ badgeId: string }` | バッジを失った（VRC+失効等） |
+| `content-refresh` | `{ contentType, fileId, itemId, itemType, actionType }` | プロフィール画像等のコンテンツを追加・削除した |
+| `modified-image-update` | `{ fileId, pixelSize, versionNumber, needsProcessing }` | 画像ファイルが変更された |
+| `economy-update` | `{ dirtyPurchases: boolean }` | Economyと連動した操作を行った（購入等） |
+| `instance-queue-joined` | `{ instanceLocation, position }` | インスタンスの参加待ちキューに入った |
+| `instance-queue-ready` | `{ instanceLocation, expiry }` | キューの先頭に到達した（`expiry` は優先権が切れる日時） |
+
+`content-refresh` の `contentType` は `avatar` / `world` / `gallery` / `icon` / `emoji` / `sticker` / `print` / `inventory` 等の値を取り、`actionType` は通常 `created` / `deleted`（`inventory` の場合のみ `add` / `delete` も観測される）。
 
 ### Group イベント
 
@@ -94,10 +103,29 @@ wss://pipeline.vrchat.cloud/?authToken={auth_cookie_value}
 
 | 値 | 意味 |
 |---|---|
-| `"offline"` | オフライン |
-| `"private"` | プライベート（場所非公開） |
+| `""`（空文字列） | 疑似null値（該当データなし） |
+| `"offline"` | VRChatクライアントを起動していない、またはPipelineに未接続 |
+| `"traveling"` | インスタンス間を移動中（ワールドのダウンロード・同期中）。`"traveling:traveling"` の形式で来ることもある |
+| `"private"` | 現在ログイン中のユーザーからは場所が非公開（Ask Me/取り込み中設定、Invite/Invite+/Groupインスタンス等） |
 | `"{worldId}:{instanceId}"` | 特定のワールドとインスタンス |
 | `"{worldId}:{instanceId}~{accessType}({userId})"` | アクセスタイプ付き |
+
+`"traveling"` の間は `travelingToLocation` フィールドに移動先のlocation文字列が入ります。
+
+## エラーメッセージ
+
+WebSocket接続が正常に開いた後でも、不正な状態になった場合はエラーメッセージが送られて接続がクローズされます。
+
+```json
+{
+  "err": "エラーの説明文",
+  "<additional>": "エラーの文脈を示す追加プロパティ"
+}
+```
+
+例:
+- VRChat側の障害時: `{"err":"Error finding user {userId}"}`
+- authTokenを発行したIPと異なるIPから接続した場合: `{"err":"authToken doesn't correspond with an active session","authToken":"{authToken}","ip":"{ipAddress}"}`
 
 ## 注意事項
 

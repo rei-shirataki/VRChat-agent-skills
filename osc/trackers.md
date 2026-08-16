@@ -3,7 +3,7 @@ scope: osc
 title: OSC Trackers
 source: https://docs.vrchat.com/docs/osc-trackers
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # OSC Trackers
@@ -41,8 +41,10 @@ OSCを使用して外部トラッカーの位置・回転データをVRChatに�
 
 ## 頭部データの動作
 
-- **位置**: 毎フレーム完全に同期されます。
-- **回転**: トラッキング空間の自動調整に使用され、徐々に調整されます。
+- **位置**: `/tracking/trackers/head/position` に合わせてOSCトラッキング空間全体がシフトされ、毎フレーム完全に（補間なしで）同期されます。
+- **回転**: `/tracking/trackers/head/rotation` はヨー（yaw）方向のアライメントに使用され、通常はトラッキング空間のヨーが目標回転へ徐々に lerp（線形補間）されます。
+  - ただし、連続送信ではなく単発のメッセージ（300ms以内に次のメッセージが来ない場合）と判定された場合は、lerpではなく一度だけ即座にアライメントされます。
+  - 300ms以内に次の頭部回転メッセージが届いた場合は連続的なストリーミングデータとみなされます。
 
 ## 推奨設定
 

@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Calendar
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Calendar
@@ -29,20 +29,24 @@ VRChat コミュニティのカレンダーイベント（グループイベン�
 
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
-| GET | `/groups/{groupId}/calendar` | getGroupCalendarEvents | グループのイベント一覧 |
-| POST | `/groups/{groupId}/calendar` | createGroupCalendarEvent | グループにイベントを作成 |
-| GET | `/groups/{groupId}/calendar/{calendarEventId}` | getGroupCalendarEvent | 特定のグループイベントを取得 |
-| PUT | `/groups/{groupId}/calendar/{calendarEventId}` | updateGroupCalendarEvent | グループイベントを更新 |
-| DELETE | `/groups/{groupId}/calendar/{calendarEventId}` | deleteGroupCalendarEvent | グループイベントを削除 |
-| GET | `/groups/{groupId}/calendar/{calendarEventId}/ics` | getGroupCalendarEventICS | ICS形式でダウンロード |
-| GET | `/groups/{groupId}/calendar/next` | getGroupNextCalendarEvent | グループの次のイベントを取得 |
-| POST | `/groups/{groupId}/calendar/{calendarEventId}/follow` | followGroupCalendarEvent | イベントをフォロー/アンフォロー |
+| GET | `/calendar/{groupId}` | getGroupCalendarEvents | グループのイベント一覧 |
+| POST | `/calendar/{groupId}/event` | createGroupCalendarEvent | グループにイベントを作成 |
+| GET | `/calendar/{groupId}/{calendarId}` | getGroupCalendarEvent | 特定のグループイベントを取得 |
+| PUT | `/calendar/{groupId}/{calendarId}/event` | updateGroupCalendarEvent | グループイベントを更新 |
+| DELETE | `/calendar/{groupId}/{calendarId}` | deleteGroupCalendarEvent | グループイベントを削除 |
+| GET | `/calendar/{groupId}/{calendarId}.ics` | getGroupCalendarEventICS | ICS形式でダウンロード |
+| GET | `/calendar/{groupId}/next` | getGroupNextCalendarEvent | グループの次のイベントを取得 |
+| POST | `/calendar/{groupId}/{calendarId}/follow` | followGroupCalendarEvent | イベントをフォロー/アンフォロー |
+
+> **注**: グループイベント系のパスは `/groups/{groupId}/calendar/...` ではなく `/calendar/{groupId}/...` です。パスパラメータ名も `calendarEventId` ではなく `calendarId` です。
 
 ## クエリパラメータ（月指定）
 
 | パラメータ | 型 | 説明 |
 |---|---|---|
 | `date` | string | 対象月を指定（例: `2026-05`）。省略時は当月 |
+
+`discoverCalendarEvents`（`GET /calendar/discover`）はカーソルベースのページネーションを使用します。初回は `nextCursor` なしで呼び出し、以降はレスポンスの `nextCursor` を次回リクエストに渡します。
 
 ## 注意事項
 

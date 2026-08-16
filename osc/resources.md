@@ -3,7 +3,7 @@ scope: osc
 title: OSC Resources
 source: https://docs.vrchat.com/docs/osc-resources
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # OSC Resources
@@ -56,12 +56,28 @@ VRChatのOSC連携で使用できるツール・ライブラリ・プロジェ�
 
 ## ハートレート
 
-| プロジェクト | 説明 |
-|---|---|
-| HRPresence | ハートレートをVRChatに送信 |
-| MagicChatbox | チャットボックスへのハートレート表示 |
-| OyasumiVR | 睡眠・リラックス状態の検出 |
-| Pulsoid | Pulsoidハートレートサービス連携 |
+| プロジェクト | 言語 | 説明 |
+|---|---|---|
+| HRPresence | C# | Windows対応GATT心拍計ツール。BPMをOSC送信 |
+| MagicChatbox | C# | Pulsoid対応デバイスでリアルタイム心拍表示（チャットボックス表示含む） |
+| OyasumiVR | TypeScript / C# | Pulsoid連携による心拍監視で睡眠モードを開始 |
+| Pulsoid | オンラインサービス | Pulsoidハートレートサービス連携（MIDI経由でOSC送信） |
+| miband-heartrate-osc | C# | Mi BandデバイスのWindows 10心拍数モニタリング |
+| pulsoid-to-vrchat-osc | NodeJS | Pulsoid経由でハートレートをOSC送信 |
+| hr-osc | Go | Stromnoからのハートレートをアバターに送信 |
+| vrc-osc-miband-hrm | NodeJS | Mi Band / Amazfitの心拍数データをアバターに送信 |
+| BluetoothHeartRateOSC | C# | Bluetooth心拍計のデータをVRChat OSCへ書き込み |
+
+---
+
+## 現実世界制御（IRL Control）
+
+| プロジェクト | 言語/形態 | 説明 |
+|---|---|---|
+| vrc-osc-audio-controls | Go | OSCでシステムオーディオ再生を制御 |
+| vrcwatch | Python | 時刻情報をOSCで送信 |
+| HardwareStat2VRChat | Go | CPU・RAM使用率をアバターに表示 |
+| VRC VRPhone | アプリ | VRCアバターからMicrosipを操作 |
 
 ---
 
@@ -69,18 +85,47 @@ VRChatのOSC連携で使用できるツール・ライブラリ・プロジェ�
 
 | プロジェクト | 言語 | 説明 |
 |---|---|---|
-| OscCore | C# | 軽量OSCライブラリ（Unity対応） |
-| python-osc | Python | Python用OSCライブラリ |
-| OSCLib-for-ESP8266 | C++ | ESP8266向けOSCライブラリ |
-| phorcys | Rust | Rust用OSCライブラリ |
-| VRC_OSCLib | C# | VRChat向けOSCライブラリ |
+| OscCore | C# | パフォーマンス最適化された軽量OSCライブラリ（Unity対応） |
+| VRCOSCGUI | C# / C++ | プラグイン機構を持つVRChat向けOSC送信ツール |
+| OSCLib-for-ESP8266 | Arduino | マイクロコントローラー向けOSCメッセージ送信ライブラリ |
+| phorcys | Rust | OSC実装およびVRChat OSC API操作ツール |
+| VRC_OSCLib | Rust | Rust向けOSC・VRChat補助ライブラリ |
+
+---
+
+## その他（Misc）
+
+| プロジェクト | 言語/形態 | 説明 |
+|---|---|---|
+| vrc-worldobject | TouchOSC / C# | 遅れて参加したユーザーにも同期するワールドスペースのプロップ作成 |
+| OSCKeyboard | Python | Windowsのキーボード入力をアバターキーボードへ送信 |
+
+---
+
+## テキスト
+
+| プロジェクト | 言語 | 説明 |
+|---|---|---|
+| TTS-Voice-Wizard | C# | Microsoft Azureを使った音声認識・音声合成アプリ（VRChat表示対応） |
+
+---
+
+## Twitch
+
+| プロジェクト | 言語 | 説明 |
+|---|---|---|
+| Spooder | NodeJS | OSCイベント駆動のストリームキャンバス |
+| EZTwitchOSCBot | NodeJS | GUI付きTwitchボット。チャットコマンドをOSCへ送信 |
+| TwitchVrcAvatarOSC | C# | Twitchボットでアバターを操作 |
 
 ---
 
 ## ユーティリティ
 
-| プロジェクト | 説明 |
-|---|---|
-| VRCOSCGUI | GUIベースのOSC操作ツール |
-| TTS-Voice-Wizard | 音声認識でチャットボックスにテキスト送信 |
-| Spooder / EZTwitchOSCBot / TwitchVrcAvatarOSC | Twitchとの連携ツール |
+| プロジェクト | 言語/形態 | 説明 |
+|---|---|---|
+| vrc-osc-scripts | Python | VRChat向けの各種OSCヘルパースクリプト集 |
+| VRCOSC | C# | VRChat向けモジュール式OSCアプリケーション作成ツール |
+| Protokol | アプリ | OSCメッセージの監視・ログ記録アプリ |
+| TouchOSC | アプリ | スクリプト機能付きOSCインターフェースアプリ |
+| AV3Emulator | C# | OSC対応のアバターエミュレーター |

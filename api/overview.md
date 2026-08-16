@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — 概要・認証
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — 概要・認証
@@ -97,18 +97,25 @@ Cookie: auth=...
 
 | カテゴリ | エンドポイント数 | 概要 |
 |---|---|---|
-| Authentication | 24 | ログイン・2FA・メール確認・セッション |
-| Users | 24 | ユーザー情報・検索・更新 |
-| Worlds | 13 | ワールド検索・作成・管理 |
-| Avatars | 15 | アバター検索・作成・管理 |
+| Authentication | 23 | ログイン・2FA・メール確認・セッション |
+| Users | 29 | ユーザー情報・検索・更新・グループ関連・永続化データ |
+| Worlds | 16 | ワールド検索・作成・管理・公開ステータス |
+| Avatars | 14 | アバター検索・作成・管理・Impostor |
 | Friends | 6 | フレンド申請・管理 |
-| Groups | 44 | グループ管理・ロール・メンバー |
+| Groups | 53 | グループ管理・ロール・メンバー |
 | Instances | 6 | インスタンス作成・取得 |
-| Notifications | 10 | 通知管理 |
+| Notifications | 13 | 通知管理 |
 | Favorites | 8 | お気に入り管理 |
-| Files | 18 | ファイルアップロード・管理 |
-| Economy | 23 | 購入・サブスクリプション・取引 |
-| Miscellaneous | 8 | 設定・ヘルスチェック |
+| Files | 19 | ファイルアップロード・管理 |
+| Economy | 44 | 購入・サブスクリプション・取引 |
+| Miscellaneous | 13 | 設定・ヘルスチェック |
+| Calendar | 13 | グループカレンダーイベントの検索・作成・管理 |
+| Inventory | 15 | インベントリアイテム・ドロップ・クローニング管理 |
+| Invite | 11 | インスタンス招待・招待メッセージの送受信 |
+| Jams | 5 | ワールドジャムの一覧・提出管理 |
+| PlayerModeration | 4 | ユーザーによるミュート・ブロック等のモデレーション |
+| Prints | 5 | VRChatカメラで撮影したプリントの管理 |
+| Props | 8 | インスタンスにスポーン可能なPropの管理 |
 
 ## 利用可能なSDK
 

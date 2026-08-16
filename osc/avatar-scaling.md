@@ -3,7 +3,7 @@ scope: osc
 title: OSC Avatar Scaling
 source: https://docs.vrchat.com/docs/osc-avatar-scaling
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # OSC Avatar Scaling
@@ -17,8 +17,8 @@ OSCを使用してアバターの目の高さ（アイハイト）を読み取�
 | アドレス | 型 | 方向 | 説明 |
 |---|---|---|---|
 | `/avatar/eyeheight` | Float | 読み書き | 現在の目の高さ（メートル） |
-| `/avatar/eyeheightmin` | Float | 読み書き | ユーザーが選択できる最小値（Udon設定） |
-| `/avatar/eyeheightmax` | Float | 読み書き | ユーザーが選択できる最大値（Udon設定） |
+| `/avatar/eyeheightmin` | Float | 読み取り | ユーザーが選択できる最小値（Udon設定） |
+| `/avatar/eyeheightmax` | Float | 読み取り | ユーザーが選択できる最大値（Udon設定） |
 | `/avatar/eyeheightscalingallowed` | Bool | 読み取り | スケール変更が許可されているか |
 
 ---
@@ -56,6 +56,7 @@ OSCを使用してアバターの目の高さ（アイハイト）を読み取�
 | OSC書き込みへの影響 | なし（OSCは制限を受けない） | なし（OSCは制限を受けない） |
 
 ユーザーがスライダーで選択できる範囲を制限しますが、OSCによる書き込みはこの制限を受けません。
+これらのアドレス自体は読み取り専用（VRChat → 外部への通知）であり、外部から書き込んでも値を変更することはできません。
 
 ---
 

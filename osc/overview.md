@@ -4,7 +4,7 @@ scope: osc
 source: https://docs.vrchat.com/docs/osc-overview
 source_wiki: https://wiki.vrchat.com/wiki/Open_Sound_Control
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat OSC — 概要
@@ -53,6 +53,13 @@ Action Menu → OSC → Enabled
 |---|---|
 | C# | OscCore（all-in-one ブランチ）|
 | Python | python-osc |
+
+## 推奨スタンドアロンアプリケーション
+
+| 用途 | アプリ | 備考 |
+|---|---|---|
+| 送信 | TouchOSC | 無料のWindowsクライアント |
+| 受信・モニタリング | Protokol | OSCメッセージの確認用 |
 
 ## 関連ファイル
 

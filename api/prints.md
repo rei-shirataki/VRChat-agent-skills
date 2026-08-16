@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Prints
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Prints
@@ -20,18 +20,20 @@ PrintはVRChatカメラから直接印刷した写真機能です。
 | POST | `/prints` | uploadPrint | 写真をアップロードして作成 |
 | GET | `/prints/user/{userId}` | getUserPrints | ユーザーのPrint一覧 |
 | GET | `/prints/{printId}` | getPrint | 特定のPrintを取得 |
-| PUT | `/prints/{printId}` | editPrint | Printを編集 |
+| POST | `/prints/{printId}` | editPrint | Printを編集 |
 | DELETE | `/prints/{printId}` | deletePrint | Printを削除 |
 
 ## uploadPrint / editPrint のフィールド
 
-| フィールド | 型 | 必須 | 説明 |
-|---|---|---|---|
-| `file` | binary (PNG) | 必須 | 画像データ（multipart/form-data） |
-| `caption` | string | 任意 | キャプション |
-| `capturedAt` | string (ISO 8601) | 任意（upload時） | 撮影日時 |
-| `worldId` | string | 任意（upload時） | 撮影したワールドのID |
-| `worldName` | string | 任意（upload時） | 撮影したワールドの名前 |
+multipart/form-data で送信します。フィールド名は `file` ではなく `image`、キャプションは `caption` ではなく `note`、撮影日時は `capturedAt` ではなく `timestamp` です。
+
+| フィールド | 型 | uploadPrint | editPrint | 説明 |
+|---|---|---|---|---|
+| `image` | binary (PNG) | 必須 | 必須 | 画像データ |
+| `note` | string | 任意 | 任意 | キャプション |
+| `timestamp` | string (ISO 8601) | 必須 | — | 撮影日時 |
+| `worldId` | string | 任意 | — | 撮影したワールドのID |
+| `worldName` | string | 任意 | — | 撮影したワールドの名前 |
 
 ## 注意事項
 

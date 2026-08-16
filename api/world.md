@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Worlds
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Worlds
@@ -23,6 +23,14 @@ last_verified: 2026-05-21
 | GET | `/worlds/{worldId}` | getWorld | 不要 | IDでワールド情報取得 |
 | PUT | `/worlds/{worldId}` | updateWorld | 必須 | ワールド情報更新 |
 | DELETE | `/worlds/{worldId}` | deleteWorld | 必須 | ワールド削除（非表示化） |
+| POST | `/worlds/{worldId}/addTags` | addWorldTags | 必須 | ワールドにタグを追加 |
+| POST | `/worlds/{worldId}/removeTags` | removeWorldTags | 必須 | ワールドからタグを削除 |
+| GET | `/worlds/{worldId}/metadata` | getWorldMetadata | 不要 | **非推奨**。ワールドのカスタムメタデータを取得 |
+| DELETE | `/worlds/{worldId}/platform/{publishedPlatform}` | deleteWorldPlatform | 必須 | ワールドの特定プラットフォーム版を削除 |
+| GET | `/worlds/{worldId}/publish` | getWorldPublishStatus | 必須 | ワールドの公開ステータスを取得 |
+| PUT | `/worlds/{worldId}/publish` | publishWorld | 必須 | ワールドを公開（週1回まで） |
+| DELETE | `/worlds/{worldId}/publish` | unpublishWorld | 必須 | ワールドの公開を取り消す |
+| GET | `/worlds/{worldId}/{instanceId}` | getWorldInstance | 必須 | ワールドのインスタンス情報を取得 |
 
 ## searchWorlds クエリパラメータ
 
@@ -42,6 +50,9 @@ last_verified: 2026-05-21
 | `platform` | string | プラットフォームでフィルター |
 | `maxUnityVersion` | string | 最大Unityバージョン |
 | `minUnityVersion` | string | 最小Unityバージョン |
+| `noplatform` | string | このプラットフォームに対応しないワールドを除外 |
+| `fuzzy` | boolean | （ソース仕様に説明文なし。パラメータ名のみ確認） |
+| `avatarSpecific` | boolean | アバターワールドのみを検索 |
 
 ## 主要レスポンスフィールド（World オブジェクト）
 

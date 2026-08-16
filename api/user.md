@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Users
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-05-21
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Users
@@ -49,6 +49,48 @@ last_verified: 2026-05-21
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | POST | `/users/{userId}/addTags` | addTags | ユーザーにタグを追加 |
+| POST | `/users/{userId}/removeTags` | removeTags | ユーザーからタグを削除 |
+
+### プロフィール・バッジ
+
+| メソッド | パス | operationId | 説明 |
+|---|---|---|---|
+| GET | `/profile/{userId}` | getPublicProfile | 公開プロフィール情報を取得 |
+| GET | `/profile/{userId}/private` | getPrivateProfile | 認証済みユーザーに見えるプロフィール情報を取得 |
+| PUT | `/users/{userId}/badges/{badgeId}` | updateBadge | ユーザーバッジを更新 |
+| GET | `/users/{userId}/tutorial` | getUserTutorialStatus | チュートリアルの完了状況を取得 |
+| GET | `/users/{userId}/feedback` | getUserFeedback | **非推奨**。ユーザーが送信したフィードバックを取得 |
+| GET | `/users/{username}/name` | getUserByName | **非推奨**（管理者権限が必要）。ユーザー名でユーザー情報を取得 |
+| GET | `/users/active` | searchActiveUsers | **非推奨**（管理者権限が必要）。アクティブユーザーをテキスト検索 |
+
+### グループ関連
+
+| メソッド | パス | operationId | 説明 |
+|---|---|---|---|
+| GET | `/users/{userId}/groups` | getUserGroups | ユーザーの公開グループ一覧を取得 |
+| GET | `/users/{userId}/groups/invited` | getInvitedGroups | 招待されているグループ一覧を取得 |
+| GET | `/users/{userId}/groups/permissions` | getUserAllGroupPermissions | 参加中の全グループの権限一覧を取得 |
+| GET | `/users/{userId}/groups/represented` | getUserRepresentedGroup | 現在代表しているグループを取得 |
+| GET | `/users/{userId}/groups/requested` | getUserGroupRequests | 参加リクエスト中のグループ一覧を取得 |
+| GET | `/users/{userId}/groups/userblocked` | getBlockedGroups | ブロックしているグループ一覧を取得 |
+| GET | `/users/{userId}/instances/groups` | getUserGroupInstances | ユーザーのグループインスタンス一覧を取得 |
+| GET | `/users/{userId}/instances/groups/{groupId}` | getUserGroupInstancesForGroup | 特定グループのインスタンス一覧を取得 |
+
+### ミューチュアル
+
+| メソッド | パス | operationId | 説明 |
+|---|---|---|---|
+| GET | `/users/{userId}/mutuals` | getMutuals | 自分と指定ユーザーのミューチュアル数を取得 |
+| GET | `/users/{userId}/mutuals/friends` | getMutualFriends | 自分と指定ユーザーの共通フレンド一覧を取得 |
+| GET | `/users/{userId}/mutuals/groups` | getMutualGroups | 自分と指定ユーザーの共通グループ一覧を取得 |
+
+### 永続化データ（World Persistence）
+
+| メソッド | パス | operationId | 説明 |
+|---|---|---|---|
+| DELETE | `/users/{userId}/persist` | deleteAllUserPersistenceData | ユーザーの全ワールド分の永続化データを削除 |
+| DELETE | `/users/{userId}/{worldId}/persist` | deleteUserPersistence | 指定ワールドの永続化データを削除 |
+| GET | `/users/{userId}/{worldId}/persist/exists` | checkUserPersistenceExists | 指定ワールドの永続化データの有無を確認 |
 
 ## 主要レスポンスフィールド（User オブジェクト）
 
@@ -71,3 +113,4 @@ last_verified: 2026-05-21
 - `searchUsers` で他ユーザーを検索するには認証が必要
 - `getUser` は認証なしでも公開情報を取得可能だが一部フィールドは `0` または空になる
 - `updateUser` は自分のアカウントのみ更新可能。パスワード変更には `currentPassword` が必要
+- `getUserFeedback`・`getUserByName`・`searchActiveUsers` は非推奨。`searchActiveUsers` と `getUserByName` は管理者権限が必要
