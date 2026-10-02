@@ -3,7 +3,7 @@ scope: meta
 title: VRChat Knowledge Base — 全体インデックス
 source: internal
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-02
 ---
 
 # VRChat Knowledge Base — 全体インデックス
@@ -47,7 +47,7 @@ VRChatの外部連携（OSC・REST API・WebSocket）に関するナレッジベ
 | [api/friends.md](../api/friends.md) | フレンド申請・フレンド状態確認・unfriend |
 | [api/notifications.md](../api/notifications.md) | 通知管理・フレンド申請の承認フロー（v1/v2） |
 | [api/instances.md](../api/instances.md) | インスタンス作成・取得・閉鎖・タイプ一覧 |
-| [api/groups.md](../api/groups.md) | グループ全操作（メンバー・ロール・招待・投稿等、53エンドポイント） |
+| [api/groups.md](../api/groups.md) | グループ全操作（メンバー・ロール・招待・投稿等、51エンドポイント） |
 | [api/favorites.md](../api/favorites.md) | お気に入り（ワールド・アバター・フレンド）・グループ管理 |
 | [api/invites.md](../api/invites.md) | 招待送受信・招待メッセージ（スロット）管理 |
 | [api/player-moderation.md](../api/player-moderation.md) | ミュート・ブロック・アバター非表示等のモデレーション |

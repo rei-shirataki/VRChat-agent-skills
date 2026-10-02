@@ -48,8 +48,8 @@ OSCを使用してVRChatの入力（移動・ジャンプ・視点・インタ�
 | `/input/MoveBackward` | 共通 | 後退（1で継続） |
 | `/input/MoveLeft` | 共通 | 左ストレイフ（1で継続） |
 | `/input/MoveRight` | 共通 | 右ストレイフ（1で継続） |
-| `/input/LookLeft` | 共通 | 左ターン。Desktop=スムーズ、VR=スナップターン |
-| `/input/LookRight` | 共通 | 右ターン。Desktop=スムーズ、VR=スナップターン |
+| `/input/LookLeft` | 共通 | 左ターン（1の間）。Desktop=スムーズ、VR=コンフォートターン有効時のみスナップターン |
+| `/input/LookRight` | 共通 | 右ターン（1の間）。Desktop=スムーズ、VR=コンフォートターン有効時のみスナップターン |
 | `/input/ComfortLeft` | VR専用 | 左スナップターン |
 | `/input/ComfortRight` | VR専用 | 右スナップターン |
 
@@ -87,7 +87,7 @@ OSCを使用してVRChatの入力（移動・ジャンプ・視点・インタ�
 | 設定 | 動作 |
 |---|---|
 | 「Toggle Voice」が有効 | 0→1 でミュート状態をトグル。その後 0 に戻す必要あり |
-| 「Toggle Voice」が無効 | プッシュトゥミュート動作。0=ミュート、1=送話中 |
+| 「Toggle Voice」が無効 | プッシュトゥミュート動作。1=ミュート、0=ミュート解除 |
 
 ---
 

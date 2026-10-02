@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Economy
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-02
 ---
 
 # VRChat REST API — Economy
@@ -42,7 +42,7 @@ VRC+・クレジット・サブスクリプション・ストアに関するAPI�
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | POST | `/products` | createProduct | 商品を作成 |
-| GET | `/products/{productId}` | getProductListingAlternate | 商品リストを取得（⚠️非推奨。`getProductListing` を使用） |
+| GET | `/products/{productId}` | getProductListingAlternate | 商品リストを取得（。`getProductListing` を使用） |
 | PUT | `/products/{productId}` | updateProduct | 商品を更新 |
 | DELETE | `/products/{productId}` | deleteProduct | 商品を削除 |
 | POST | `/listing` | createProductListingDirect | 商品リストを作成 |
@@ -89,13 +89,13 @@ VRC+・クレジット・サブスクリプション・ストアに関するAPI�
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | GET | `/Steam/transactions` | getSteamTransactions | Steam トランザクション一覧 |
-| GET | `/Steam/transactions/{transactionId}` | getSteamTransaction | 特定の Steam トランザクション（⚠️非推奨） |
+| GET | `/Steam/transactions/{transactionId}` | getSteamTransaction | 特定の Steam トランザクション |
 | GET | `/Admin/transactions` | getAdminTransactions | 管理者トランザクション一覧（内部用） |
 | GET | `/Admin/transactions/{transactionId}` | getAdminTransaction | 特定の管理者トランザクション（⚠️非推奨・内部用） |
 
 ## 注意事項
 
-- `getSteamTransaction` / `getAdminTransaction` / `getProductListingAlternate` は OpenAPI 仕様上 `deprecated: true` が付与されている。前者2つは `getSteamTransactions` / `getAdminTransactions` と全く同じ情報を返すため実用性は低く、後者は `getProductListing` を使うこと
+- `getAdminTransaction` / `getProductListingAlternate` は OpenAPI 仕様上 `deprecated: true` が付与されている。前者は `getAdminTransactions` と全く同じ情報を返すため実用性は低く、後者は `getProductListing` を使うこと
 - `/Admin/transactions` 系のエンドポイントは `x-internal: true` が付与されており、VRChat内部での利用を想定したもの
 - `getEarningsMetrics` は VRChat Creator Economy の収益者向け
 - このカテゴリは VRChat Creator Economy（クレジット・商品販売機能）の追加以降に大幅に拡充されており、商品（Product）・商品リスト（Listing）・ストア（Store）・Tilia決済連携など多数のエンドポイントが存在する

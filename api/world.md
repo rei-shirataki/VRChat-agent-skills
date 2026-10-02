@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Worlds
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-02
 ---
 
 # VRChat REST API — Worlds
@@ -24,7 +24,7 @@ last_verified: 2026-08-16
 | PUT | `/worlds/{worldId}` | updateWorld | 必須 | ワールド情報更新 |
 | DELETE | `/worlds/{worldId}` | deleteWorld | 必須 | ワールド削除（非表示化） |
 | POST | `/worlds/{worldId}/addTags` | addWorldTags | 必須 | ワールドにタグを追加 |
-| POST | `/worlds/{worldId}/removeTags` | removeWorldTags | 必須 | ワールドからタグを削除 |
+| POST | `/worlds/{worldId}/deleteTags` | removeWorldTags | 必須 | ワールドからタグを削除（パスは `deleteTags`。ユーザー側の `removeTags` とは異なる） |
 | GET | `/worlds/{worldId}/metadata` | getWorldMetadata | 不要 | **非推奨**。ワールドのカスタムメタデータを取得 |
 | DELETE | `/worlds/{worldId}/platform/{publishedPlatform}` | deleteWorldPlatform | 必須 | ワールドの特定プラットフォーム版を削除 |
 | GET | `/worlds/{worldId}/publish` | getWorldPublishStatus | 必須 | ワールドの公開ステータスを取得 |

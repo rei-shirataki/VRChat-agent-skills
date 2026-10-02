@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Player Moderation
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-02
 ---
 
 # VRChat REST API — Player Moderation
