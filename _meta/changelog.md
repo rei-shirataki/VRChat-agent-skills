@@ -3,28 +3,13 @@ scope: meta
 title: 仕様変更ログ
 source: internal
 status: verified
-last_verified: 2026-10-02
+last_verified: 2026-05-21
 ---
 
 # 仕様変更ログ
 
 VRChat OSC・API・WebSocketの仕様変更を記録するファイルです。
 変更を確認したら `last_verified` とともにここに記録してください。
-
-## 2026-10-02
-
-- **変更内容**: 情報の鮮度・誤り確認（再検証）
-  - **REST API**: `vrchatapi/specification` v1.21.0（`main`、2026-09-30コミット）の全326操作と `api/*.md` 全表を method+path+operationId で機械照合。フィールド単位の再照合は未実施（2026-08-16以降、スキーマ変更が多数あり）
-    - `api/world.md`: `removeWorldTags` のパスが誤り（`/worlds/{id}/removeTags` → 正しくは `/deleteTags`）
-    - `api/economy.md`: `getSteamTransaction` に誤って付いていた非推奨注記を削除（仕様上 deprecated は `getAdminTransaction` と `getProductListingAlternate` のみ）
-    - `api/overview.md`: カテゴリ別件数を v1.21.0 に更新（合計326）。未収録だった約45件（2FA管理・メール確認・モデレーション報告・グローバルアバターモデレーション・permissions・cosmetics・clientConfig・tutorial・instanceVibes 等）を補足表として追加
-    - `_meta/index.md`: groups のエンドポイント数 53→51
-  - **OSC**: `docs.vrchat.com` が本環境から到達不可（egress遮断）のため公式ドキュメントとは**再照合できず**、`last_verified` は更新していない。代わりに `vrchat-community/osc` wiki（最終更新2023-08）と照合し、以下を修正
-    - `osc/input-controller.md`: `/input/Voice` のプッシュトゥミュート値が逆（正: 1=ミュート、0=解除）。LookLeft/LookRight のスナップターン条件（コンフォートターン有効時）を明記
-    - `osc/oscquery.md`: 送信先として認識されるパス（`/avatar`、`/tracking/vrsystem`）とWindows版の同一マシン制限を追記
-  - 未確認: Chatbox の144文字・9行・第3引数（公式docs由来で wiki より新しい情報のため維持。wiki記載の「ASCIIのみ」は古い可能性）、`avatar-parameters.md`/`diy.md`/`resources.md` の再照合
-- **影響ファイル**: `api/*.md`（`last_verified` はエンドポイントレベル照合分）、`osc/input-controller.md`、`osc/oscquery.md`、`_meta/index.md`、`_meta/changelog.md`
-- **ソース**: https://github.com/vrchatapi/specification（v1.21.0）、https://github.com/vrchat-community/osc/wiki
 
 ## 2026-08-16
 

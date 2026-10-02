@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — 概要・認証
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-10-02
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — 概要・認証
@@ -78,56 +78,6 @@ Cookie: auth=...
 
 セッションを無効化します。
 
-### 5. 認証・アカウント管理系エンドポイント（補足）
-
-ログインフロー以外の認証関連エンドポイント。詳細仕様は OpenAPI の該当 operationId を参照。
-
-| メソッド | パス | operationId | 説明 |
-|---|---|---|---|
-| POST | `/auth/twofactorauth/totp/pending` | enable2FA | TOTP 2FA の有効化を開始 |
-| POST | `/auth/twofactorauth/totp/pending/verify` | verifyPending2FA | 有効化中の2FAコードを検証 |
-| DELETE | `/auth/twofactorauth/totp/pending` | cancelPending2FA | 2FA有効化を取り消し |
-| DELETE | `/auth/twofactorauth` | disable2FA | 2FAを無効化 |
-| GET | `/auth/user/twofactorauth/otp` | getRecoveryCodes | 2FAリカバリーコードを取得 |
-| GET | `/auth/verifyLoginPlace` | verifyLoginPlace | ログイン場所の確認（メール認証リンク用） |
-| GET | `/auth/confirmEmail` | confirmEmail | メールアドレス確認 |
-| POST | `/auth/user/resendEmail` | resendEmailConfirmation | 確認メールを再送 |
-| GET | `/auth/exists` | checkUserExists | ユーザー名/メールの存在確認（429でレート制限） |
-| POST | `/auth/register` | registerUserAccount | **非推奨**。アカウント登録 |
-| PUT | `/users/{userId}/delete` | deleteUser | アカウント削除 |
-| GET | `/sso/{provider}` | getSsoToken | SSOトークン取得 |
-| GET | `/oauth/redirectCode` | getOAuthRedirectCode | OAuthリダイレクトコード取得 |
-| GET/POST/DELETE | `/auth/user/avatarmoderations` | getGlobalAvatarModerations / createGlobalAvatarModeration / deleteGlobalAvatarModeration | グローバルアバターモデレーション |
-| GET/POST | `/moderationReports` | getModerationReports / submitModerationReport | モデレーション報告の一覧・送信 |
-| DELETE | `/moderationReports/{moderationReportId}` | deleteModerationReport | モデレーション報告を削除 |
-| GET/PUT | `/auth/user/interestsAndPreferences` | getInterestsAndPreferences / updateInterestsAndPreferences | 興味・設定の取得/更新 |
-
-### 6. その他の未詳細化エンドポイント
-
-各カテゴリの個別ファイルにはまだ詳細がないエンドポイント（OpenAPI v1.21.0 に存在）。
-
-| メソッド | パス | operationId |
-|---|---|---|
-| GET | `/ageVerification/status` | getAgeVerificationStatus |
-| PUT | `/profile/{userId}` | updateProfile |
-| GET/PUT | `/users/{userId}/clientConfig` | getUserClientConfig / updateUserClientConfig |
-| POST/DELETE | `/users/{userId}/tutorial` | completeUserTutorial / clearUserTutorials |
-| GET | `/cosmetics/index/{itemType}` | getCosmetics |
-| GET | `/user/{userId}/cosmetics` | getUserCosmetics |
-| GET | `/instanceCategories` | getInstanceCategories |
-| GET | `/instanceVibes` | getInstanceVibes |
-| GET | `/favorites/groups/{favoriteGroupType}` | getFavoriteGroupsByType |
-| GET | `/favorites/groups/{favoriteGroupType}/{favoriteGroupName}` | getFavoriteGroupContents |
-| GET | `/economy/status` | getEconomyStatus |
-| GET | `/user/{userId}/economy/balance` | getEconomyBalance |
-| GET | `/listing/{productId}/products` | getProductListingProducts |
-| PUT | `/files/order` | setGroupGalleryFileOrder |
-| PUT | `/assetReview/{assetReviewId}/notes` | updateAssetReviewNotes |
-| GET | `/beta/{betaName}` / `/beta/{betaName}/register` | getBeta / getBetaRegistration |
-| GET | `/frontend/branches` | getFrontendBranches |
-| GET/POST | `/permissions` | getPermissions / createPermission |
-| GET/PUT/DELETE | `/permissions/{permissionId}` | getPermission / updatePermission / deletePermission |
-
 ## 共通ヘッダー
 
 | ヘッダー | 値 | 説明 |
@@ -145,24 +95,22 @@ Cookie: auth=...
 
 ## エンドポイントカテゴリ
 
-> OpenAPI仕様 v1.21.0（2026-09-30時点）の `tags` に基づく件数。合計326。
-
 | カテゴリ | エンドポイント数 | 概要 |
 |---|---|---|
-| Authentication | 27 | ログイン・2FA・メール確認・セッション |
-| Users | 35 | ユーザー情報・検索・更新・グループ関連・永続化データ |
+| Authentication | 23 | ログイン・2FA・メール確認・セッション |
+| Users | 29 | ユーザー情報・検索・更新・グループ関連・永続化データ |
 | Worlds | 16 | ワールド検索・作成・管理・公開ステータス |
 | Avatars | 14 | アバター検索・作成・管理・Impostor |
 | Friends | 6 | フレンド申請・管理 |
-| Groups | 51 | グループ管理・ロール・メンバー |
-| Instances | 8 | インスタンス作成・取得 |
+| Groups | 53 | グループ管理・ロール・メンバー |
+| Instances | 6 | インスタンス作成・取得 |
 | Notifications | 13 | 通知管理 |
-| Favorites | 10 | お気に入り管理 |
-| Files | 21 | ファイルアップロード・管理 |
-| Economy | 46 | 購入・サブスクリプション・取引 |
-| Miscellaneous | 16 | 設定・ヘルスチェック |
+| Favorites | 8 | お気に入り管理 |
+| Files | 19 | ファイルアップロード・管理 |
+| Economy | 44 | 購入・サブスクリプション・取引 |
+| Miscellaneous | 13 | 設定・ヘルスチェック |
 | Calendar | 13 | グループカレンダーイベントの検索・作成・管理 |
-| Inventory | 17 | インベントリアイテム・ドロップ・クローニング管理 |
+| Inventory | 15 | インベントリアイテム・ドロップ・クローニング管理 |
 | Invite | 11 | インスタンス招待・招待メッセージの送受信 |
 | Jams | 5 | ワールドジャムの一覧・提出管理 |
 | PlayerModeration | 4 | ユーザーによるミュート・ブロック等のモデレーション |

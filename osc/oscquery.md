@@ -33,12 +33,3 @@ VRChatは **2023.3.1** リリース以降、OSCQuery仕様を実装していま�
 
 OSCQuery対応アプリケーションはVRChatと自動的に接続・設定が行われます。
 各アプリケーションのドキュメントでOSCQuery対応状況と必要なセットアップ手順を確認してください。
-
-## 注意事項・送信先として認識されるパス
-
-- Windows 版 VRChat は、HTTPライブラリの制限により、OSCアドレス・値の情報を**同一マシン上のアプリにしか提供できない**（Android 版は制限なし）。
-- 複数の受信アプリへ自動送信されるには、アプリが OSC/OSCQuery サービスを広告し、OSCQuery のアドレスツリーに以下のパスのいずれかを含める必要がある（出典: vrchat-community/osc wiki「OSCQuery」）:
-  - `/avatar` — `/avatar/change` と `/avatar/parameters/*` を受信
-  - `/tracking/vrsystem` — `/tracking/vrsystem/head`・`leftwrist`・`rightwrist`・`pose` を受信（ユーザーが追加の法的通知に同意した後）
-- 認識されると、VRChat は HUD 通知で送信先アプリ名を表示する。
-- ユーザーが起動引数でポートを指定している場合は、従来どおりそのポートへ全 OSC メッセージが送られる。

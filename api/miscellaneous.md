@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Miscellaneous
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-10-02
+last_verified: 2026-08-16
 ---
 
 # VRChat REST API — Miscellaneous
