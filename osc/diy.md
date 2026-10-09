@@ -3,7 +3,7 @@ scope: osc
 title: OSC DIY
 source: https://docs.vrchat.com/docs/osc-diy
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # OSC DIY

@@ -3,7 +3,7 @@ scope: osc
 title: OSCQuery
 source: https://docs.vrchat.com/docs/oscquery
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # OSCQuery

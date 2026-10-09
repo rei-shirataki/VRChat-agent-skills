@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Inventory
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Inventory
@@ -22,6 +22,17 @@ last_verified: 2026-08-16
 | GET | `/inventory` | getInventory | インベントリオブジェクトを取得 |
 | GET | `/inventory/collections` | getInventoryCollections | コレクション名一覧 |
 | GET | `/inventory/drops` | getInventoryDrops | ドロップ一覧 |
+
+`getInventory`（`GET /inventory`）には、クエリ `isNavBar`（boolean）と `seen`（boolean）が追加されています。
+
+### コスメティクス
+
+| メソッド | パス | operationId | 説明 |
+|---|---|---|---|
+| GET | `/cosmetics/index/{itemType}` | getCosmetics | VRChatが公開している種別のコスメティクスを、所持の有無を問わず全件一覧 |
+| GET | `/user/{userId}/cosmetics` | getUserCosmetics | ユーザーが所持しているコスメティクス一覧（`acquiredOn` / `acquisition` / `id` / `itemType` / `templateId` / `userAttributes`） |
+
+`itemType`（`getCosmetics` のパスパラメータ）は `droneskin` / `iconFrame` など。インベントリ側の `InventoryItemType` は `bundle` / `droneskin` / `emoji` / `iconFrame` / `nameplateEffect` / `portalskin` / `profileEffect` / `prop` / `sticker` / `warpeffect`。
 
 ### アイテム操作
 

@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Groups
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Groups
@@ -105,6 +105,15 @@ last_verified: 2026-08-16
 | GET | `/groups/{groupId}/transfer` | getGroupTransferability | 譲渡可能かを確認 |
 | POST | `/groups/{groupId}/transfer` | initiateOrAcceptGroupTransfer | グループ譲渡を開始/承認 |
 | DELETE | `/groups/{groupId}/transfer` | cancelGroupTransfer | グループ譲渡をキャンセル |
+
+## 追加されたクエリパラメータ（2026-08以降の仕様）
+
+| operationId | パラメータ | 説明 |
+|---|---|---|
+| getGroup | `purpose` (string) | 用途の指定（説明は仕様に未記載） |
+| getGroupGalleryImages | `v` (integer) | レスポンスバージョン。`2` を指定すると画像をページネーション付きオブジェクトで包んで返す |
+
+`searchGroups`（`GET /groups`）は、OpenAPI 仕様に `authCookie` 必須が明示されました（以前は `security` の記載がありませんでした）。
 
 ## searchGroups クエリパラメータ
 

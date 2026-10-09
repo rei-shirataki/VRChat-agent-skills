@@ -3,7 +3,7 @@ scope: osc
 title: OSC Avatar Parameters
 source: https://docs.vrchat.com/docs/osc-avatar-parameters
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # OSC Avatar Parameters
@@ -133,6 +133,27 @@ VRChat SDKが自動で設定する組み込みパラメータの一覧です。
 | `ScaleFactorInverse` | Float | 連続値 | スケール係数の逆数 |
 | `EyeHeightAsMeters` | Float | 連続値 | 目の高さ（メートル） |
 | `EyeHeightAsPercent` | Float | 連続値 | 目の高さ（デフォルトに対する相対比率） |
+
+### 補足（wiki.vrchat.com）
+
+出典: [wiki.vrchat.com/wiki/OSC](https://wiki.vrchat.com/wiki/OSC)
+
+- カスタムのアバターパラメータはすべて読み書き可能ですが、組み込み（予約）パラメータは**多くが読み取り専用**です
+- 次の2つ＋表情ブレンドは、厳密には必須の組み込みではないものの、デフォルトのアニメーターに含まれ、ほぼ常に存在します
+
+| パラメータ名 | 型 | 説明 |
+|---|---|---|
+| `VRCEmote` | Int | デフォルトのアニメーション（1〜16） |
+| `VRCFaceBlendV` | Float | 表情ブレンド（縦） |
+| `VRCFaceBlendH` | Float | 表情ブレンド（横） |
+
+- `PreviewMode`: メニューのアバタープレビュー中は 1、それ以外は 0（**OSC 経由では常に 0**）
+- `IsOnFriendsList`: ローカルユーザーがそのアバターのリモートユーザーとフレンドか（**OSC 経由では常に false**）
+- `Seated`: `InStation` と同じ値の重複パラメータ。「シーテッドモード／スタンディングモード」とは別物
+- `AvatarVersion`: SDK3 で作られていれば 3、そうでなければ 0
+- `VelocityMagnitude` = √(VelocityX² + VelocityY² + VelocityZ²)
+- `EyeHeightAsPercent`: 目の高さを既定の範囲で線形補間した値（例: 0.0 = 0.2 m、0.5 = 2.6 m、1.0 = 5.0 m）
+- `AngularY`: 右向きの角速度、`VelocityX/Y/Z`: 右／上／前向きの速度（m/s）
 
 ## 注意事項
 

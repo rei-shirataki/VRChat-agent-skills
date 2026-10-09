@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Avatars
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Avatars
@@ -25,7 +25,7 @@ last_verified: 2026-08-16
 | DELETE | `/avatars/{avatarId}/impostor` | deleteImpostor | 生成済みImpostorを削除 |
 | POST | `/avatars/{avatarId}/impostor/enqueue` | enqueueImpostor | Impostor生成をキューに追加 |
 | PUT | `/avatars/{avatarId}/select` | selectAvatar | アバターを装着 |
-| PUT | `/avatars/{avatarId}/selectFallback` | selectFallbackAvatar | **非推奨**。フォールバックアバターとして設定 |
+| PUT | `/avatars/{avatarId}/selectFallback` | selectFallbackAvatar | フォールバックアバターとして設定（対象がフォールバック用タグ付きでない場合は403。2026-08時点の仕様で `deprecated` は解除） |
 | GET | `/avatarStyles` | getAvatarStyles | アバタースタイル一覧 |
 | GET | `/avatars/impostor/queue/stats` | getImpostorQueueStats | Impostor生成キューの統計 |
 | GET | `/users/{userId}/avatar` | getOwnAvatar | 自分の現在のアバターを取得（他ユーザー指定はエラー） |
@@ -70,4 +70,4 @@ last_verified: 2026-08-16
 - `searchAvatars` は**自分のアバターまたはfeaturedアバターのみ**検索可能。他ユーザーのアバターは検索不可
 - `selectAvatar` でアバターを装着すると即座に反映される
 - アバター作成時にカスタムIDを指定することが可能だが、既存IDは使用不可
-- `selectFallbackAvatar` は非推奨。呼び出すには対象アバターがフォールバック用としてタグ付けされている必要がある
+- `selectFallbackAvatar` を呼び出すには対象アバターがフォールバック用としてタグ付けされている必要がある

@@ -4,7 +4,7 @@ scope: osc
 source: https://docs.vrchat.com/docs/osc-overview
 source_wiki: https://wiki.vrchat.com/wiki/Open_Sound_Control
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat OSC — 概要
@@ -29,6 +29,34 @@ Action Menu → OSC → Enabled
 |---|---|---|
 | 受信（外部→VRChat） | 9000 | 外部アプリから VRChat へ送信 |
 | 送信（VRChat→外部） | 9001 | VRChat から外部アプリへ送信 |
+| OSCQuery（外部⇄VRChat） | TCP（可変） | OSCQuery の HTTP サーバー（localhost = `127.0.0.1` 上）。外部アプリが OSCQuery のデータを取得する |
+| mDNS（外部⇄VRChat） | UDP 5353 | マルチキャスト DNS によるサービス検出（OSCQuery の自動検出に使用） |
+
+TCP と mDNS の行の出典: [wiki.vrchat.com/wiki/OSC](https://wiki.vrchat.com/wiki/OSC)。
+
+## メッセージの型
+
+VRChat の OSC エンドポイントは、1つのメッセージに複数の値を載せられるものが多く、各値は次のいずれかの型です。
+
+| 名前 | タイプタグ | 説明 |
+|---|---|---|
+| int | `i` | 32ビット符号付き整数（ビッグエンディアン） |
+| float | `f` | 32ビット IEEE 754 単精度浮動小数点（ビッグエンディアン） |
+| boolean | `T` / `F` | 真 / 偽 |
+| string | `s` | ASCII テキスト（エンドポイントによっては UTF-8 も受け付ける） |
+
+OSC メッセージのタイプタグ文字列は `,` で始まり、値ごとに1文字が続きます（例: `,sTT`）。
+
+引数が1つだけのときは、等価な別の型の値も受け付けることがあります。
+
+| boolean | int | float |
+|---|---|---|
+| false | 0 | 0.0 |
+| true | 1 | 1.0 |
+
+例: boolean のアバターパラメータ `/avatar/parameters/TurboEncabulator` に `,T`、`,i 1`、`,f 1.0` のいずれを送っても `true` になります。
+
+VRChat は **OSC バンドルの受信・処理には対応**していますが、**自身はバンドルを送信しません**。
 
 ## ポートの上書き（コマンドライン引数）
 
@@ -68,6 +96,8 @@ Action Menu → OSC → Enabled
 - [Chatbox](./chatbox.md)
 - [Input Controller](./input-controller.md)
 - [Trackers](./trackers.md)
+- [User Camera](./usercamera.md)
+- [Dolly](./dolly.md)
 - [Eye Tracking](./eye-tracking.md)
 - [Debugging](./debugging.md)
 - [OSCQuery](./oscquery.md)

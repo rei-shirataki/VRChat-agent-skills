@@ -3,7 +3,7 @@ scope: osc
 title: OSC as Input Controller
 source: https://docs.vrchat.com/docs/osc-as-input-controller
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # OSC as Input Controller
@@ -31,6 +31,7 @@ OSCを使用してVRChatの入力（移動・ジャンプ・視点・インタ�
 | `/input/LookHorizontal` | -1〜1 | 左右視点移動。VRでコンフォートターン有効時はスナップターン |
 | `/input/UseAxisRight` | -1〜1 | 右手アイテム使用（動作未確認） |
 | `/input/GrabAxisRight` | -1〜1 | 右手アイテム掴む（動作未確認） |
+| `/input/LookVertical` | -1〜1 | 上下視点移動（上=1 / 下=-1）。※公式ドキュメントのページには載っておらず、クライアントの OSCQuery 応答にのみ存在（wiki.vrchat.com より） |
 | `/input/MoveHoldFB` | -1〜1 | 保持オブジェクトを前後に移動 |
 | `/input/SpinHoldCwCcw` | -1〜1 | 保持オブジェクトを時計回り（1）/ 反時計回り（-1）に回転 |
 | `/input/SpinHoldUD` | -1〜1 | 保持オブジェクトを上下に回転 |
@@ -48,8 +49,8 @@ OSCを使用してVRChatの入力（移動・ジャンプ・視点・インタ�
 | `/input/MoveBackward` | 共通 | 後退（1で継続） |
 | `/input/MoveLeft` | 共通 | 左ストレイフ（1で継続） |
 | `/input/MoveRight` | 共通 | 右ストレイフ（1で継続） |
-| `/input/LookLeft` | 共通 | 左ターン。Desktop=スムーズ、VR=スナップターン |
-| `/input/LookRight` | 共通 | 右ターン。Desktop=スムーズ、VR=スナップターン |
+| `/input/LookLeft` | 共通 | 左ターン（1の間）。Desktop=スムーズ、VR=コンフォートターン有効時のみスナップターン |
+| `/input/LookRight` | 共通 | 右ターン（1の間）。Desktop=スムーズ、VR=コンフォートターン有効時のみスナップターン |
 | `/input/ComfortLeft` | VR専用 | 左スナップターン |
 | `/input/ComfortRight` | VR専用 | 右スナップターン |
 
@@ -72,6 +73,34 @@ OSCを使用してVRChatの入力（移動・ジャンプ・視点・インタ�
 | `/input/GrabLeft` | 左手でハイライトアイテムを掴む |
 | `/input/UseLeft` | 左手でハイライトアイテムを使用 |
 | `/input/DropLeft` | 左手のアイテムを放す |
+
+### その他（OSCQuery 応答のみに存在）
+
+以下は公式ドキュメントのページには載っておらず、クライアントの OSCQuery 応答にのみ存在します（出典: [wiki.vrchat.com/wiki/OSC](https://wiki.vrchat.com/wiki/OSC)）。
+
+| アドレス | 説明 |
+|---|---|
+| `/input/ToggleSitStand` | 座り／立ちの切り替え |
+| `/input/AFKToggle` | AFK モードの切り替え |
+
+### ワールドデバッグビュー（`/input/ShowDebugInfo0`〜`9`）
+
+いずれも Bool のボタン入力（write-only）です。
+
+| アドレス | 表示内容 |
+|---|---|
+| `/input/ShowDebugInfo0` ※ | VRC_UiShapes（操作可能な UI）のデバッグ可視化（OSCQuery 応答のみ。ワールド作成者限定⁑） |
+| `/input/ShowDebugInfo1` | 読み込まれているアセットバンドルの情報（ワールド開発にはほぼ無関係） |
+| `/input/ShowDebugInfo2` | 使用中の VRChat のビルドと FPS |
+| `/input/ShowDebugInfo3` | 出力ログ |
+| `/input/ShowDebugInfo4` | 他ユーザーに関する各種統計 |
+| `/input/ShowDebugInfo5` | ネットワーク関連のグラフ |
+| `/input/ShowDebugInfo6` | ワールド内の全ネットワークオブジェクトと各種統計⁑ |
+| `/input/ShowDebugInfo7` | ローカルプレイヤー付近の全 PhysBone と Contact の可視化⁑ |
+| `/input/ShowDebugInfo8` | 同期されている全オブジェクトの上にパネルを重ねて、各オブジェクトの統計を表示⁑ |
+| `/input/ShowDebugInfo9` | インスタンス内の全プレイヤーの足元にデバッグ統計を表示⁑ |
+
+⁑ ワールド作成者のみ使用可能。Web サイトで「World Debugging」を有効にした場合は他のユーザーも使用できます。
 
 ### メニュー
 

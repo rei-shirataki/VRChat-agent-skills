@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Miscellaneous
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Miscellaneous
@@ -23,6 +23,9 @@ last_verified: 2026-08-16
 | GET | `/visits` | getCurrentOnlineUsers | 不要 | 現在のオンラインユーザー数を取得 |
 | GET | `/infoPush` | getInfoPush | 必須 | インフォメーション通知を取得 |
 | GET | `/auth/permissions` | getAssignedPermissions | 必須 | 自分に付与されているパーミッション一覧 |
+| GET | `/beta/{betaName}` | getBeta | 不要 | ベータプログラムと、登録時に入力が必要なフィールド（`userFields`）を取得 |
+| GET | `/beta/{betaName}/register` | getBetaRegistration | 必須 | 自分のベータプログラム登録情報を取得（未登録は404） |
+| GET | `/frontend/branches` | getFrontendBranches | 必須 | 自分が切り替え可能なフロントエンドのブランチ一覧 |
 | GET | `/css/app.css` | getCSS | 不要 | フロントエンドのCSSを取得（302リダイレクト） |
 | GET | `/js/app.js` | getJavaScript | 不要 | フロントエンドのJSを取得（302リダイレクト） |
 
