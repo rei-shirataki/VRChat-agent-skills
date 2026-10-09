@@ -3,7 +3,7 @@ scope: meta
 title: VRChat Knowledge Base — 全体インデックス
 source: internal
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat Knowledge Base — 全体インデックス
@@ -30,6 +30,8 @@ VRChatの外部連携（OSC・REST API・WebSocket）に関するナレッジベ
 | [osc/oscquery.md](../osc/oscquery.md) | OSCQuery自動検出プロトコル |
 | [osc/resources.md](../osc/resources.md) | ツール・ライブラリ一覧 |
 | [osc/diy.md](../osc/diy.md) | カスタム実装ガイド・OSCメッセージ構造・推奨ライブラリ |
+| [osc/usercamera.md](../osc/usercamera.md) | ユーザーカメラの制御（`/usercamera/*`）。出典は VRChat Wiki |
+| [osc/dolly.md](../osc/dolly.md) | Dolly（カメラパス）の操作（`/dolly/*`）。出典は VRChat Wiki |
 
 ### REST API（非公式・コミュニティ）
 
@@ -46,7 +48,7 @@ VRChatの外部連携（OSC・REST API・WebSocket）に関するナレッジベ
 | [api/avatar.md](../api/avatar.md) | アバター検索・作成・装着 |
 | [api/friends.md](../api/friends.md) | フレンド申請・フレンド状態確認・unfriend |
 | [api/notifications.md](../api/notifications.md) | 通知管理・フレンド申請の承認フロー（v1/v2） |
-| [api/instances.md](../api/instances.md) | インスタンス作成・取得・閉鎖・タイプ一覧 |
+| [api/instances.md](../api/instances.md) | インスタンス作成・取得・閉鎖・タイプ一覧・インスタンスID構造・リージョン・カテゴリ/バイブ |
 | [api/groups.md](../api/groups.md) | グループ全操作（メンバー・ロール・招待・投稿等、53エンドポイント） |
 | [api/favorites.md](../api/favorites.md) | お気に入り（ワールド・アバター・フレンド）・グループ管理 |
 | [api/invites.md](../api/invites.md) | 招待送受信・招待メッセージ（スロット）管理 |
@@ -58,7 +60,9 @@ VRChatの外部連携（OSC・REST API・WebSocket）に関するナレッジベ
 | [api/props.md](../api/props.md) | インスタンス内スポーンアイテム（Prop）管理 |
 | [api/jams.md](../api/jams.md) | 創作コンテスト（Jam）一覧・投稿管理 |
 | [api/prints.md](../api/prints.md) | VRChatカメラ写真（Print）アップロード・管理 |
-| [api/miscellaneous.md](../api/miscellaneous.md) | システム設定・ヘルスチェック・オンライン人数・パーミッション |
+| [api/miscellaneous.md](../api/miscellaneous.md) | システム設定・ヘルスチェック・オンライン人数・パーミッション・ベータプログラム・フロントエンドブランチ |
+| [api/tags.md](../api/tags.md) | ユーザー・ワールド・グループ・言語タグの意味 |
+| [api/shortlinks.md](../api/shortlinks.md) | `vrch.at` / `vrc.group` の短縮リンク・リダイレクト・グループコードからのID解決 |
 
 ### WebSocket（非公式・コミュニティ）
 

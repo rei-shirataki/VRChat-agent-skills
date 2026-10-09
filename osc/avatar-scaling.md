@@ -3,7 +3,7 @@ scope: osc
 title: OSC Avatar Scaling
 source: https://docs.vrchat.com/docs/osc-avatar-scaling
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # OSC Avatar Scaling

@@ -3,13 +3,33 @@ scope: meta
 title: 仕様変更ログ
 source: internal
 status: verified
-last_verified: 2026-05-21
+last_verified: 2026-10-09
 ---
 
 # 仕様変更ログ
 
 VRChat OSC・API・WebSocketの仕様変更を記録するファイルです。
 変更を確認したら `last_verified` とともにここに記録してください。
+
+## 2026-10-09
+
+- **変更内容**: 前回検証（2026-08-16）以降の更新を取り込み、あわせて「元々KBになかった情報」を追加した（Issue #1）
+  - **REST API: 仕様更新に伴う修正**（基準は 2026-08-09 時点の `vrchatapi/specification` `b7fff1a`、比較先は 2026-10-08 時点の `main`。リリース済みは v1.22.1、`main` は v1.22.2-nightly.4）
+    - 新規エンドポイント23件を追記: 認証系4件（`interestsAndPreferences` の GET/PUT、`oauth/redirectCode`、`sso/{provider}`）、ユーザー系8件（`profile/{userId}` PUT、`users/{userId}/tutorial` の POST/DELETE、`users/{userId}/clientConfig` の GET/PUT、`ageVerification/status`）、Economy 3件（`economy/status`、`listing/{productId}/products`、`user/{userId}/economy/balance`）、Favorites 2件、Instances 3件、Inventory 2件、Misc 3件（`beta/{betaName}`、`beta/{betaName}/register`、`frontend/branches`）
+    - `removeWorldTags` のパスを `/worlds/{worldId}/removeTags` から `/worlds/{worldId}/deleteTags` に修正
+    - 仕様上の `deprecated` が解除された4件（`selectFallbackAvatar` / `getSteamTransaction` / `getUserFeedback` / `getWorldMetadata`。8/9時点では非推奨、10/8時点の `main`（v1.22.1以降）では解除）の「非推奨」注記を修正
+    - リクエストボディの変更を反映: `updateUser` から `bio` / `bioLinks` / `userIcon` が削除され `updateProfile` へ移動、`createInstance` に `categoryId` / `vibeIds` / `description` を追加、`updateWorld` に `recommendedCapacity` / `previewYoutubeId` / `urlList` / `disabledPropAbilities` を追加
+    - 追加クエリパラメータを反映（`getGroupCalendarEvents` の `after` / `limit` / `sort`、`getPublicProfile` の `asSelf` / `withGroupsAndWorlds`、`getSubscriptions` の `gifts` / `recurring` など）と、OpenAPI 仕様上の認証（`security`）表記の変更（実挙動の変更とは限らない）を `api/overview.md` に記載
+    - `api/overview.md` のカテゴリ別エンドポイント数を更新（Authentication 27 / Users 35 / Instances 9 / Favorites 10 / Economy 47 / Miscellaneous 16 / Inventory 17）
+    - `updateInstance`（`PUT /instances/{worldId}:{instanceId}`、カレンダーイベントの紐付け）は **v1.22.2-nightly のみで未リリース**のため、その旨を明記して記載
+    - `api/instances.md` の `type` 表から、仕様の `InstanceType` に存在しない `groupPublic` を削除し、`group` + `groupAccessType` の説明に修正
+  - **OSC（`wiki.vrchat.com/wiki/OSC` 由来）を追加**: `osc/usercamera.md`（`/usercamera/*` 全エンドポイントと既定値・範囲）、`osc/dolly.md`（`/dolly/*`）を新規作成。`osc/input-controller.md` に `LookVertical` / `ToggleSitStand` / `AFKToggle` / `ShowDebugInfo0〜9`、`osc/trackers.md` に `/tracking/vrsystem/*/pose`、`osc/avatar-parameters.md` に `VRCEmote` / `VRCFaceBlendV/H` と組み込みパラメータの補足、`osc/overview.md` にメッセージ型表・OSCQuery の TCP ポート・mDNS の UDP 5353 を追加
+  - **REST（`vrchat.community` のガイド系ページ）を追加**: `api/tags.md`（ユーザー・ワールド・グループ・言語タグ）、`api/shortlinks.md`（`vrch.at` / `vrc.group` のリダイレクト、グループコードからのID解決）を新規作成。`api/instances.md` にインスタンスIDの引数構造・リージョントークン・location の特殊値を追加
+  - 検証範囲: OSC は `docs.vrchat.com` の10ページ（各ページの `updatedAt` は 2025-11-13、`osc-avatar-scaling` のみ 2026-04-27 でいずれも前回検証より前）とアドレスを機械的に突き合わせ、差分なしを確認。WebSocket は `vrchat.community/websocket` のイベント種別が既存の `websocket/pipeline.md` に網羅されていることを確認
+  - **未実施**: 仕様のレスポンススキーマのフィールド単位の比較（操作・パラメータ・リクエストボディ参照・ステータスコードの比較までは全エンドポイントで実施）。`wiki.vrchat.com` は OSC ページのみ、OSCQuery の GitHub Wiki は未確認。`api/files.md` / `friends.md` / `invites.md` / `jams.md` / `notifications.md` / `player-moderation.md` / `prints.md` / `props.md` は上記の範囲で差分がなかったため `last_verified` のみ更新
+  - `websocket/pipeline.md` は仕様側に `economy-update` / `modified-image-update` のスキーマが無い点と、`content-refresh` のスキーマが「正しいか不明」とされている点を確認したが、内容は変更していない
+- **影響ファイル**: `api/*.md`（全19件の `last_verified` 更新、うち内容変更は11件）、`api/tags.md`・`api/shortlinks.md`（新規）、`osc/usercamera.md`・`osc/dolly.md`（新規）、`osc/overview.md`・`input-controller.md`・`trackers.md`・`avatar-parameters.md`、`_meta/index.md`、`SKILL.md`、`README.md`
+- **ソース**: https://github.com/vrchatapi/specification（`b7fff1a` → `main`/v1.22.2-nightly.4）、https://wiki.vrchat.com/wiki/OSC、https://docs.vrchat.com/docs/osc-overview（および配下のOSCページ）、https://vrchat.community/ （`instances` / `shortlinks` / `tags` / `websocket` / `faq`）
 
 ## 2026-08-16
 

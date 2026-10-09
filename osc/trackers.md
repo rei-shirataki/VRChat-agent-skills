@@ -3,7 +3,7 @@ scope: osc
 title: OSC Trackers
 source: https://docs.vrchat.com/docs/osc-trackers
 status: verified
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # OSC Trackers
@@ -28,6 +28,18 @@ OSCを使用して外部トラッカーの位置・回転データをVRChatに�
 |---|---|---|
 | `/tracking/trackers/head/position` | Float × 3（X, Y, Z） | 頭部の位置 |
 | `/tracking/trackers/head/rotation` | Float × 3（X, Y, Z） | 頭部の回転（オイラー角） |
+
+### システムポーズ（読み取り専用）
+
+VRChat からの出力で、`Float × 6`（X, Y, Z の位置、X, Y, Z のオイラー角）です。公式ドキュメントのページには載っておらず、クライアントの OSCQuery 応答にのみ存在します（出典: [wiki.vrchat.com/wiki/OSC](https://wiki.vrchat.com/wiki/OSC)）。
+
+| アドレス | 説明 |
+|---|---|
+| `/tracking/vrsystem/head/pose` | ヘッドセットのシステムポーズ |
+| `/tracking/vrsystem/leftwrist/pose` | 左手首のシステムポーズ |
+| `/tracking/vrsystem/rightwrist/pose` | 右手首のシステムポーズ |
+
+トラッカーは最大8個（腰・胸・両足・両ひざ・両ひじ）で、台数を減らす（例: 腰と足だけ）ほうが、VRChat の IK が誤差を補正しやすく結果が良くなることがあります。
 
 ## 座標系
 

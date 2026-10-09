@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Economy
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Economy
@@ -20,7 +20,7 @@ VRC+・クレジット・サブスクリプション・ストアに関するAPI�
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | GET | `/auth/user/subscription` | getCurrentSubscriptions | 現在有効なサブスクリプション一覧 |
-| GET | `/subscriptions` | getSubscriptions | 存在する全サブスクリプションプラン一覧（`vrchatplus-monthly` 等） |
+| GET | `/subscriptions` | getSubscriptions | 存在する全サブスクリプションプラン一覧（`vrchatplus-monthly` 等）。クエリ `gifts`（ギフト用のみ返す）／`recurring`（定期購読のみ返す）で絞り込める |
 | GET | `/user/subscription/recent` | getRecentSubscription | 直近のサブスクリプションを取得 |
 | GET | `/users/{userId}/subscription/eligible` | getUserSubscriptionEligible | サブスクリプションの利用資格を確認 |
 | GET | `/users/{userId}/credits/eligible` | getUserCreditsEligible | クレジット残高に基づくサブスクリプション利用資格を確認 |
@@ -68,9 +68,11 @@ VRC+・クレジット・サブスクリプション・ストアに関するAPI�
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | GET | `/economy/metrics/earnings` | getEarningsMetrics | 収益の合計と内訳 |
+| GET | `/economy/status` | getEconomyStatus | エコノミーがリクエストを受け付けているかを取得（`economyOnline` / `economyState`） |
 | GET | `/user/{userId}/balance` | getBalance | ユーザーの残高を取得 |
 | GET | `/user/{userId}/balance/earnings` | getBalanceEarnings | ユーザーの収益残高を取得 |
 | GET | `/user/{userId}/economy/account` | getEconomyAccount | エコノミーアカウント情報を取得 |
+| GET | `/user/{userId}/economy/balance` | getEconomyBalance | ユーザーのエコノミーアカウントの残高を取得 |
 | GET | `/user/{userId}/economy/balances` | getEconomyBalances | 統合残高情報を取得 |
 | GET | `/user/{userId}/economy/payouts/list` | getEconomyPayouts | 支払い履歴を取得 |
 | GET | `/user/{userId}/economy/payouts/status` | getEconomyPayoutStatus | 支払いステータス・資格情報を取得 |
@@ -89,13 +91,27 @@ VRC+・クレジット・サブスクリプション・ストアに関するAPI�
 | メソッド | パス | operationId | 説明 |
 |---|---|---|---|
 | GET | `/Steam/transactions` | getSteamTransactions | Steam トランザクション一覧 |
-| GET | `/Steam/transactions/{transactionId}` | getSteamTransaction | 特定の Steam トランザクション（⚠️非推奨） |
+| GET | `/Steam/transactions/{transactionId}` | getSteamTransaction | 特定の Steam トランザクション（`getSteamTransactions` と同じ情報を返すため実用性は低い） |
 | GET | `/Admin/transactions` | getAdminTransactions | 管理者トランザクション一覧（内部用） |
 | GET | `/Admin/transactions/{transactionId}` | getAdminTransaction | 特定の管理者トランザクション（⚠️非推奨・内部用） |
 
+## 追加されたクエリパラメータ（2026-08以降の仕様）
+
+| operationId | パラメータ | 説明 |
+|---|---|---|
+| getProductPurchases | `active` | 絞り込み。仕様の説明は「ユーザーのリスティングとインベントリバンドルの絞り込み」 |
+| getProductPurchases | `receiverId` | 受け取り側のユーザーIDで絞る |
+| getStore | `hydrateContext` (boolean) | コンテキスト情報を展開して返す（説明は仕様に未記載） |
+| listStores | `sellerId` | 対象の販売者ID。以前は任意（絞り込み）だったが、現在の仕様では**必須**（"Seller to scope the results to"） |
+| getEarningsMetrics | `sellerId` | 以前は必須だったが、現在の仕様では**任意**（"Filter results by seller"） |
+| getRecentSubscription | `userId` | ユーザーIDで絞る |
+| getEconomyAccount | `getLimits` (boolean) | レスポンスにアカウントの利用上限を含める |
+
 ## 注意事項
 
-- `getSteamTransaction` / `getAdminTransaction` / `getProductListingAlternate` は OpenAPI 仕様上 `deprecated: true` が付与されている。前者2つは `getSteamTransactions` / `getAdminTransactions` と全く同じ情報を返すため実用性は低く、後者は `getProductListing` を使うこと
+- `getAdminTransaction` / `getProductListingAlternate` は OpenAPI 仕様上 `deprecated: true` が付与されている。前者は `getAdminTransactions` と全く同じ情報を返すため実用性は低く、後者は `getProductListing` を使うこと
+- `getSteamTransaction` は2026-08-09以降の仕様（v1.22.1）で `deprecated` が解除されたが、`getSteamTransactions` と全く同じ情報を返すため実用性は低い
+- `getEconomyStatus`（`GET /economy/status`）はエコノミーがリクエストを受け付けているか（`economyOnline` boolean / `economyState` integer）を返す。メンテナンス時などの事前確認に使える
 - `/Admin/transactions` 系のエンドポイントは `x-internal: true` が付与されており、VRChat内部での利用を想定したもの
 - `getEarningsMetrics` は VRChat Creator Economy の収益者向け
 - このカテゴリは VRChat Creator Economy（クレジット・商品販売機能）の追加以降に大幅に拡充されており、商品（Product）・商品リスト（Listing）・ストア（Store）・Tilia決済連携など多数のエンドポイントが存在する

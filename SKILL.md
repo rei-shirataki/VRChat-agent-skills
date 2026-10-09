@@ -1,6 +1,6 @@
 ---
 name: VRChat Knowledge Base
-description: VRChatの外部連携仕様(OSC・REST API・WebSocket)に関するナレッジベース。VRChat OSCの送受信実装(Avatar Parameters、Chatbox、Input Controller、Eye Tracking、トラッカー統合、アバタースケール、OSCQuery)、VRChat REST API呼び出し実装(ユーザー・ワールド・アバター・フレンド・グループ・招待・通知・インスタンス・お気に入り・プレイヤーモデレーション・Economy・ファイルアップロード・カレンダー・インベントリ・Props・Jams・Prints)、VRChat WebSocket/Pipelineイベント購読、OyasumiVR・Pulsoid・VRCXなどのVRChat連携ツール開発、VRChatボット・自動化スクリプト開発の際に使用する。
+description: VRChatの外部連携仕様(OSC・REST API・WebSocket)に関するナレッジベース。VRChat OSCの送受信実装(Avatar Parameters、Chatbox、Input Controller、Eye Tracking、トラッカー統合、アバタースケール、OSCQuery、User Camera、Dolly)、VRChat REST API呼び出し実装(ユーザー・ワールド・アバター・フレンド・グループ・招待・通知・インスタンス・お気に入り・プレイヤーモデレーション・Economy・ファイルアップロード・カレンダー・インベントリ・Props・Jams・Prints、タグ、短縮リンク)、VRChat WebSocket/Pipelineイベント購読、OyasumiVR・Pulsoid・VRCXなどのVRChat連携ツール開発、VRChatボット・自動化スクリプト開発の際に使用する。
 ---
 
 # VRChat Knowledge Base — SKILL
@@ -9,8 +9,8 @@ description: VRChatの外部連携仕様(OSC・REST API・WebSocket)に関する
 
 以下のキーワードや状況が含まれる場合、このスキルを参照すること：
 
-- VRChat OSC（送受信、Avatar Parameters、Chatbox、Input、Eye Tracking、トラッカー）
-- VRChat API / REST API（ユーザー情報取得・更新、ワールド、認証、フレンド、グループ、招待、通知、インスタンス、お気に入り、プレイヤーモデレーション、Economy・クレジット、ファイルアップロード、カレンダー、インベントリ、Props、Jams、Prints、システム設定）
+- VRChat OSC（送受信、Avatar Parameters、Chatbox、Input、Eye Tracking、トラッカー、User Camera、Dolly）
+- VRChat API / REST API（ユーザー情報取得・更新、ワールド、認証、フレンド、グループ、招待、通知、インスタンス、お気に入り、プレイヤーモデレーション、Economy・クレジット、ファイルアップロード、カレンダー、インベントリ、Props、Jams、Prints、システム設定、タグ、短縮リンク）
 - VRChat WebSocket / Pipeline イベント
 - OyasumiVR、Pulsoid、VRCX などの VRChat 連携ツール
 - VRChat のボット・自動化スクリプト開発
@@ -21,8 +21,8 @@ description: VRChatの外部連携仕様(OSC・REST API・WebSocket)に関する
 
 | セクション | ディレクトリ | 信頼度 |
 |---|---|---|
-| OSC（公式サポート） | `osc/` （11ファイル） | ✅ verified |
-| REST API（非公式） | `api/` （19ファイル） | ✅ community |
+| OSC（公式サポート） | `osc/` （13ファイル） | ✅ verified |
+| REST API（非公式） | `api/` （21ファイル） | ✅ community |
 | WebSocket（非公式） | `websocket/` （1ファイル） | ✅ community |
 | メタ情報 | `_meta/index.md`, `_meta/changelog.md` | ✅ verified |
 

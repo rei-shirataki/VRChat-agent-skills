@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Calendar
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Calendar
@@ -45,6 +45,8 @@ VRChat コミュニティのカレンダーイベント（グループイベン�
 | パラメータ | 型 | 説明 |
 |---|---|---|
 | `date` | string | 対象月を指定（例: `2026-05`）。省略時は当月 |
+
+`getGroupCalendarEvents`（`GET /calendar/{groupId}`）には、クエリ `after`（この日時より後に始まるイベントのみ返す。date-time）、`limit`、`sort`（例: `startTime_ascending`）が追加されています。
 
 `discoverCalendarEvents`（`GET /calendar/discover`）はカーソルベースのページネーションを使用します。初回は `nextCursor` なしで呼び出し、以降はレスポンスの `nextCursor` を次回リクエストに渡します。
 

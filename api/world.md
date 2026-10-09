@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — Worlds
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — Worlds
@@ -24,8 +24,8 @@ last_verified: 2026-08-16
 | PUT | `/worlds/{worldId}` | updateWorld | 必須 | ワールド情報更新 |
 | DELETE | `/worlds/{worldId}` | deleteWorld | 必須 | ワールド削除（非表示化） |
 | POST | `/worlds/{worldId}/addTags` | addWorldTags | 必須 | ワールドにタグを追加 |
-| POST | `/worlds/{worldId}/removeTags` | removeWorldTags | 必須 | ワールドからタグを削除 |
-| GET | `/worlds/{worldId}/metadata` | getWorldMetadata | 不要 | **非推奨**。ワールドのカスタムメタデータを取得 |
+| POST | `/worlds/{worldId}/deleteTags` | removeWorldTags | 必須 | ワールドからタグを削除（パスは `deleteTags`。ユーザー版は `removeTags` で名前が異なる） |
+| GET | `/worlds/{worldId}/metadata` | getWorldMetadata | 不要 | ワールドのカスタムメタデータを取得（`updateWorld` で任意のオブジェクトを設定可能。実運用では未使用とみられる。2026-08時点の仕様で `deprecated` は解除） |
 | DELETE | `/worlds/{worldId}/platform/{publishedPlatform}` | deleteWorldPlatform | 必須 | ワールドの特定プラットフォーム版を削除 |
 | GET | `/worlds/{worldId}/publish` | getWorldPublishStatus | 必須 | ワールドの公開ステータスを取得 |
 | PUT | `/worlds/{worldId}/publish` | publishWorld | 必須 | ワールドを公開（週1回まで） |
@@ -71,6 +71,22 @@ last_verified: 2026-08-16
 | `tags` | string[] | タグ一覧 |
 | `publicationDate` | string | 公開日時（ISO 8601） |
 | `updatedAt` | string | 最終更新日時（ISO 8601） |
+
+## updateWorld リクエストボディ
+
+`PUT /worlds/{worldId}` のフィールドです（すべて任意）。
+
+| フィールド | 型 | 説明 |
+|---|---|---|
+| `name` / `description` | string | 名称・説明 |
+| `authorId` / `authorName` | string | 作者 |
+| `capacity` / `recommendedCapacity` | integer | 最大／推奨収容人数 |
+| `tags` | string[] | タグ（[tags.md](tags.md)） |
+| `releaseStatus` | string | 公開状態 |
+| `imageUrl` / `assetUrl` / `assetVersion` / `unityPackageUrl` / `unityVersion` / `platform` | string | アセット関連 |
+| `previewYoutubeId` | string | null | プレビュー用 YouTube 動画ID |
+| `urlList` | string[] | ワールドが使用する URL の一覧 |
+| `disabledPropAbilities` | string[] | 無効化する Prop の機能 |
 
 ## 注意事項
 

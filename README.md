@@ -26,7 +26,9 @@ VRChat-agent-skills/
 │   ├── debugging.md
 │   ├── oscquery.md
 │   ├── resources.md
-│   └── diy.md
+│   ├── diy.md
+│   ├── usercamera.md
+│   └── dolly.md
 ├── api/                     # REST API（非公式・コミュニティ）
 │   ├── overview.md
 │   ├── user.md
@@ -46,7 +48,9 @@ VRChat-agent-skills/
 │   ├── props.md
 │   ├── jams.md
 │   ├── prints.md
-│   └── miscellaneous.md
+│   ├── miscellaneous.md
+│   ├── tags.md
+│   └── shortlinks.md
 └── websocket/               # WebSocket（非公式・コミュニティ）
     └── pipeline.md
 ```

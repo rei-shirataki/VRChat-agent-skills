@@ -3,7 +3,7 @@ scope: api
 title: VRChat REST API — 概要・認証
 source: https://vrchat.community/docs/api/
 status: community
-last_verified: 2026-08-16
+last_verified: 2026-10-09
 ---
 
 # VRChat REST API — 概要・認証
@@ -61,6 +61,17 @@ Authorization: Basic {base64(urlencode(username):urlencode(password))}
 { "code": "123456" }
 ```
 
+### 2.5 認証まわりのその他のエンドポイント
+
+| メソッド | パス | operationId | 説明 |
+|---|---|---|---|
+| GET | `/auth/user/interestsAndPreferences` | getInterestsAndPreferences | 自分がオンにしている興味・好みを取得 |
+| PUT | `/auth/user/interestsAndPreferences` | updateInterestsAndPreferences | 興味・好みをオン(`true`)／オフ(`false`)にする。本文に無いキーは現状維持 |
+| GET | `/oauth/redirectCode` | getOAuthRedirectCode | 現在のセッションをOAuthリダイレクトに引き渡すための短命コード(`code`: `redirect_...`)を発行 |
+| GET | `/sso/{provider}` | getSsoToken | 外部サービス用のSSOトークン(`token`)を発行。`provider` は `canny` / `furality` のみ。他は400 |
+
+`interestsAndPreferences` のキー(いずれも boolean。値が `true` のキーだけが返る): `Anime` / `Art` / `Avatars` / `BigGroup` / `Explore` / `Fantasy` / `Fashion` / `FindAvatars` / `Furries` / `Horror` / `LanguageLearning` / `MeetPeople` / `Music` / `Mystery` / `SciFi` / `SmallGroup` / `Surprise`
+
 ### 3. セッション確認
 
 ```
@@ -77,6 +88,19 @@ Cookie: auth=...
 ```
 
 セッションを無効化します。
+
+### OpenAPI 仕様上の認証表記の変更（2026-08-09以降）
+
+OpenAPI 仕様の `security` 表記が変わったもので、実際の挙動が変わったとは限りません（確認していません）。
+
+| 区分 | operationId |
+|---|---|
+| `security` が未指定から `authCookie` 必須に明示された | `searchGroups`、`getGroupCalendarEventICS`、`createWorld` |
+| `authCookie` 必須から「認証なしでも可（認証任意）」に変わった | `getInstance`、`getShortName`、`getAvatarStyles`、`checkUserExists`、`discoverCalendarEvents`、`getFeaturedCalendarEvents` |
+| 認証任意として新設 | `getInstanceCategories`、`getInstanceVibes` |
+| `security: []`（認証不要）が明示された | `confirmEmail`、`registerUserAccount`、`verifyLoginPlace`、`getCSS`、`getJavaScript` |
+
+`checkUserExists`（`GET /auth/exists`）は 429（レート制限）を返すことがあります。
 
 ## 共通ヘッダー
 
@@ -97,25 +121,33 @@ Cookie: auth=...
 
 | カテゴリ | エンドポイント数 | 概要 |
 |---|---|---|
-| Authentication | 23 | ログイン・2FA・メール確認・セッション |
-| Users | 29 | ユーザー情報・検索・更新・グループ関連・永続化データ |
+| Authentication | 27 | ログイン・2FA・メール確認・セッション |
+| Users | 35 | ユーザー情報・検索・更新・グループ関連・永続化データ |
 | Worlds | 16 | ワールド検索・作成・管理・公開ステータス |
 | Avatars | 14 | アバター検索・作成・管理・Impostor |
 | Friends | 6 | フレンド申請・管理 |
 | Groups | 53 | グループ管理・ロール・メンバー |
-| Instances | 6 | インスタンス作成・取得 |
+| Instances | 9 | インスタンス作成・取得・更新、カテゴリ・バイブ |
 | Notifications | 13 | 通知管理 |
-| Favorites | 8 | お気に入り管理 |
+| Favorites | 10 | お気に入り管理 |
 | Files | 19 | ファイルアップロード・管理 |
-| Economy | 44 | 購入・サブスクリプション・取引 |
-| Miscellaneous | 13 | 設定・ヘルスチェック |
+| Economy | 47 | 購入・サブスクリプション・取引 |
+| Miscellaneous | 16 | 設定・ヘルスチェック |
 | Calendar | 13 | グループカレンダーイベントの検索・作成・管理 |
-| Inventory | 15 | インベントリアイテム・ドロップ・クローニング管理 |
+| Inventory | 17 | インベントリアイテム・ドロップ・クローニング・コスメティクス管理 |
 | Invite | 11 | インスタンス招待・招待メッセージの送受信 |
 | Jams | 5 | ワールドジャムの一覧・提出管理 |
 | PlayerModeration | 4 | ユーザーによるミュート・ブロック等のモデレーション |
 | Prints | 5 | VRChatカメラで撮影したプリントの管理 |
 | Props | 8 | インスタンスにスポーン可能なPropの管理 |
+
+## 関連ドキュメント
+
+| ファイル | 内容 |
+|---|---|
+| [tags.md](tags.md) | ユーザー・ワールド・グループ・言語タグの意味 |
+| [shortlinks.md](shortlinks.md) | `vrch.at` / `vrc.group` の短縮リンクとリダイレクト、グループコードからのID解決 |
+| [instances.md](instances.md) | インスタンスIDの構造、リージョン、location の特殊値 |
 
 ## 利用可能なSDK
 
